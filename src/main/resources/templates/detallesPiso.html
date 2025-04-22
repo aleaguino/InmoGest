@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Piso</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" aria-current="page" th:href="@{/piso/piso}">
+            <img src="resources/assets/inmogest.png" alt="InmoGest" height="100">
+        </a>
+    </nav>
+
+    <div class="container mt-4">
+        <h1 class="text-center">Detalles del Piso</h1>
+
+        <!-- Tabla de Datos Generales -->
+        <div class="mb-4">
+            <h2 class="text-center">Datos Generales</h2>
+            <table class="table table-striped">
+                <tr>
+                    <th>Ciudad</th>
+                    <td th:text="${piso.ciudad}">Ciudad</td>
+                </tr>
+                <tr>
+                    <th>Dirección</th>
+                    <td th:text="${piso.ubicacion}">Dirección del Piso</td>
+                </tr>
+                <tr>
+                    <th>Año</th>
+                    <td th:text="${piso.anno}">Año de construcción</td>
+                </tr>
+                <tr>
+                    <th>Precio de compra</th>
+                    <td th:text="${piso.precio}">Precio de compra</td>
+                </tr>
+                <tr>
+                    <th>Estado (Libre/Alquilado)</th>
+                    <td th:text="${piso.estado}">Estado del Piso (Ocupado/Libre)</td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- Tabla de Ingresos -->
+        <div class="mb-4">
+            <h2 class="text-center">Ingresos</h2>
+            <table class="table table-striped">
+                <tr>
+                    <th>Ingreso Mensual</th>
+                    <td th:text="${piso.ingresoMensual}">Ingreso Mensual</td>
+                </tr>
+                <tr>
+                    <th>Ingreso Anual</th>
+                    <td th:text="${piso.ingresosAnuales}">Ingreso Anual</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Tabla de Datos del Inquilino -->
+        <div>
+            <h2 class="text-center">Datos del Inquilino</h2>
+            <table class="table table-striped">
+                <tr>
+                    <th>Nombre del inquilino</th>
+                    <td th:text="${piso.inquilinoNombre}">Nombre del inquilino</td>
+                </tr>
+                <tr>
+                    <th>DNI del inquilino</th>
+                    <td th:text="${piso.inquilinoDNI}">DNI del inquilino</td>
+                </tr>
+                <tr>
+                    <th>IBAN del inquilino</th>
+                    <td th:text="${piso.inquilinoIBAN}">IBAN del inquilino</td>
+                </tr>
+                <tr>
+                    <th>Porcentaje a subir IPC</th>
+                    <td th:text="${piso.porcentajeIPC}">Porcentaje a subir IPC</td>
+                </tr>
+                <tr>
+                    <th>Fecha de última actualización del IPC</th>
+                    <td th:text="${piso.fechaActualizacionIPC}">Fecha de última actualización del IPC</td>
+                </tr>
+
+            </table>
+        </div>
+        
+        <!-- Tabla de Gastos -->
+        <div>
+            <h2 class="text-center">Gastos</h2>
+            <table class="table table-striped">
+                <tr>
+                    <th>Comunidad</th>
+                    <td th:text="${piso.comunidad}">Comunidad</td>
+                </tr>
+                <tr>
+                    <th>IBI</th>
+                    <td th:text="${piso.ibi}">IBI</td>
+                </tr>
+                <tr>
+                    <th>Seguro</th>
+                    <td th:text="${piso.seguro}">Seguro</td>
+                </tr>
+                <tr>
+                    <th>Reforma</th>
+                    <td th:text="${piso.reforma}">Reforma</td>
+                </tr>
+                <tr>
+                    <th>Averias</th>
+                    <td th:text="${piso.averias}">Averias</td>
+                </tr>
+                <tr>
+                    <th>Agua</th>
+                    <td th:text="${piso.agua}">Agua</td>
+                </tr>
+                <tr>
+                    <th>Luz</th>
+                    <td th:text="${piso.luz}">Luz</td>
+                </tr>
+                <tr>
+                    <th>Gas</th>
+                    <td th:text="${piso.gas}">Gas</td>
+                </tr>
+                <tr>
+                    <th>Total Gastos Mensuales</th>
+                    <td th:text="${piso.comunidad + piso.ibi + piso.seguro + piso.agua + piso.luz + piso.gas}">Total Gastos Mensuales</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Botón para editar -->
+        <div class="text-center">
+            <a class="btn btn-primary" th:href="@{/piso/modificar/{id}(id=${piso.id})}">Editar</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>InmoGest - Gestión de Inmuebles</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            padding-top: 60px;
+            background: linear-gradient(45deg, #FFD700, #FF6347); /* Cambia los colores del degradado si deseas */
+            color: #000; /* Color de texto para que sea legible en el fondo */
+        }
+        .main-content {
+            padding: 50px;
+        }
+        .triptych {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+        .triptych-item {
+            flex: 0 0 calc(33.33% - 20px);
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .btn-primary {
+            background-color: #FF6347; /* Cambia el color del botón a rojo claro */
+            border-color: #FF6347;
+        }
+        .btn-primary:hover {
+            background-color: #FF5733; /* Cambia el color del botón al pasar el mouse */
+            border-color: #FF5733;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" aria-current="page" th:href="@{/}">
+                 <img src="resources/assets/inmogest.png" alt="InmoGest">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{/login}">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{/registro}">Registro</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+        <div class="row">
+            <h1 class="text-center">Bienvenidos a InmoGest - Gestión de Inmuebles</h1>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-6 offset-md-3">
+                <a href="/login" class="btn btn-primary btn-lg d-block mb-3">Iniciar Sesión</a>
+                <a href="/registro" class="btn btn-secondary btn-lg d-block">Registro</a>
+            </div>
+        </div>
+
+        <div class="triptych">
+            <div class="triptych-item">
+                <h2>Administración de Propiedades</h2>
+                <p>Administra tus propiedades de manera eficiente. Gestiona alquileres, ventas y mantenimiento fácilmente.</p>
+            </div>
+            <div class="triptych-item">
+                <h2>Seguimiento y Mantenimiento</h2>
+                <p>Supervisa el estado de tus inmuebles, realiza mantenimiento preventivo y asegúrate de su correcto funcionamiento.</p>
+            </div>
+            <div class="triptych-item">
+                <h2>Interacción con Clientes</h2>
+                <p>Ofrece un entorno seguro para la información sensible. Protege la privacidad y evita vulnerabilidades.</p>
+            </div>
+        </div>
+
+        <div class="triptych mt-5">
+            <div class="triptych-item">
+                <h2>Personalización</h2>
+                <p>Adapta InmoGest a tus necesidades, personaliza los datos y las vistas según tus preferencias.</p>
+            </div>
+            <div class="triptych-item">
+                <h2>Seguridad</h2>
+                <p>Protege la información sensible de tus clientes y garantiza la seguridad de las transacciones.</p>
+            </div>
+            <div class="triptych-item">
+                <h2>Colaboración</h2>
+                <p>Facilita la colaboración entre los usuarios, permitiendo la compartición de información y recursos.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+</body>
+</html>

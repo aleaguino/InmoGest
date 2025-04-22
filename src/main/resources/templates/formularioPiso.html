@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario de Piso</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-section {
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            background-color: #f8f9fa;
+        }
+        .form-section h3 {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Formulario de Piso</h1>
+        <form th:action="@{/piso/guardar}" th:object="${piso}" method="post">
+            
+            <!-- Datos del Piso -->
+            <div class="form-section">
+                <h3>Datos del Piso</h3>
+                <div class="mb-3">
+                    <label for="ciudad" class="form-label">Ciudad:</label>
+                    <input type="text" id="ciudad" name="ciudad" th:field="*{ciudad}" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="ubicacion" class="form-label">Dirección:</label>
+                    <input type="text" id="ubicacion" name="ubicacion" th:field="*{ubicacion}" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="anno" class="form-label">Año de construcción:</label>
+                    <input type="number" id="anno" name="anno" th:field="*{anno}" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="precio" class="form-label">Precio:</label>
+                    <input type="text" id="precio" name="precio" th:field="*{precio}" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="estado" class="form-label">Estado (Libre/Alquilado):</label>
+                    <select id="estado" name="estado" th:field="*{estado}" class="form-select" required>
+                        <option value="" disabled>Seleccione el estado</option>
+                        <option value="Libre">Libre</option>
+                        <option value="Alquilado">Alquilado</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Datos del Inquilino -->
+            <div class="form-section">
+                <h3>Datos del Inquilino</h3>
+                <div class="mb-3">
+                    <label for="inquilinoNombre" class="form-label">Nombre del Inquilino:</label>
+                    <input type="text" id="inquilinoNombre" name="inquilinoNombre" th:field="*{inquilinoNombre}" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="inquilinoDNI" class="form-label">DNI del Inquilino:</label>
+                    <input type="text" id="inquilinoDNI" name="inquilinoDNI" th:field="*{inquilinoDNI}" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="inquilinoIBAN" class="form-label">IBAN del Inquilino:</label>
+                    <input type="text" id="inquilinoIBAN" name="inquilinoIBAN" th:field="*{inquilinoIBAN}" class="form-control" required>
+                </div>
+            </div>
+
+            <!-- Datos Financieros -->
+            <div class="form-section">
+                <h3>Datos Financieros</h3>
+                <div class="mb-3">
+                    <label for="ingresoMensual" class="form-label">Ingreso (Mensual):</label>
+                    <input type="number" id="ingresoMensual" name="ingresoMensual" th:field="*{ingresoMensual}" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="comunidad" class="form-label">Comunidad:</label>
+                    <input type="number" id="comunidad" name="comunidad" th:field="*{comunidad}" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="ibi" class="form-label">IBI:</label>
+                    <input type="number" id="ibi" name="ibi" th:field="*{ibi}" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="seguro" class="form-label">Seguro:</label>
+                    <input type="number" id="seguro" name="seguro" th:field="*{seguro}" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="reforma" class="form-label">Reforma:</label>
+                    <input type="number" id="reforma" name="reforma" th:field="*{reforma}" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="averias" class="form-label">Averías:</label>
+                    <input type="number" id="averias" name="averias" th:field="*{averias}" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="agua" class="form-label">Agua:</label>
+                    <input type="number" id="agua" name="agua" th:field="*{agua}" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="luz" class="form-label">Luz:</label>
+                    <input type="number" id="luz" name="luz" th:field="*{luz}" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="gas" class="form-label">Gas:</label>
+                    <input type="number" id="gas" name="gas" th:field="*{gas}" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="porcentajeIPC" class="form-label">Porcentaje Subida IPC:</label>
+                    <input type="number" step="0.01" id="porcentajeIPC" name="porcentajeIPC" th:field="*{porcentajeIPC}" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="fechaActualizacionIPC" class="form-label">Fecha de última actualización del IPC:</label>
+                    <input type="date" id="fechaActualizacionIPC" name="fechaActualizacionIPC" th:field="*{fechaActualizacionIPC}" class="form-control" required>
+                </div>
+
+            </div>
+
+            <input type="hidden" name="idUsuario" th:value="${usuario.id}" />
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Guardar Piso</button>
+                <a th:href="@{/piso/piso}" class="btn btn-secondary">Volver a Mis Pisos</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

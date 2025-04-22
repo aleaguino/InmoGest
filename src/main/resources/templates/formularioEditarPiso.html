@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Piso</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        .section {
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            background-color: #f8f9fa;
+        }
+        .section h2 {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Modificar Piso</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Modificar Piso</h1>
+        
+        <form method="post" th:action="@{/piso/modificar/{id}(id=${piso.id})}">
+            <!-- Datos Generales -->
+            <div class="section">
+                <h2 class="text-center">Datos Generales</h2>
+                <div class="mb-3">
+                    <label for="ciudad" class="form-label">Ciudad:</label>
+                    <input type="text" class="form-control" id="ciudad" name="ciudad" th:value="${piso.ciudad}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="ubicacion" class="form-label">Dirección:</label>
+                    <input type="text" class="form-control" id="ubicacion" name="ubicacion" th:value="${piso.ubicacion}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="anno" class="form-label">Año de construcción:</label>
+                    <input type="number" class="form-control" id="anno" name="anno" th:value="${piso.anno}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="precio" class="form-label">Precio de compra:</label>
+                    <input type="text" class="form-control" id="precio" name="precio" th:value="${piso.precio}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="estado" class="form-label">Estado (Libre/Alquilado):</label>
+                    <select id="estado" name="estado" th:value="${piso.estado}" required>
+                        <option value="" disabled>Seleccione el estado</option>
+                        <option value="Libre">Libre</option>
+                        <option value="Alquilado">Alquilado</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Datos del Inquilino -->
+            <div class="section">
+                <h2 class="text-center">Datos del Inquilino</h2>
+                <div class="mb-3">
+                    <label for="inquilinoNombre" class="form-label">Nombre del Inquilino:</label>
+                    <input type="text" class="form-control" id="inquilinoNombre" name="inquilinoNombre" th:value="${piso.inquilinoNombre}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="inquilinoDNI" class="form-label">DNI del Inquilino:</label>
+                    <input type="text" class="form-control" id="inquilinoDNI" name="inquilinoDNI" th:value="${piso.inquilinoDNI}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="inquilinoIBAN" class="form-label">IBAN del Inquilino:</label>
+                    <input type="text" class="form-control" id="inquilinoIBAN" name="inquilinoIBAN" th:value="${piso.inquilinoIBAN}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="porcentajeIPC" class="form-label">Porcentaje a subir de IPC:</label>
+                    <input type="number" class="form-control" id="porcentajeIPC" name="porcentajeIPC" th:value="${piso.porcentajeIPC}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="fechaActualizacionIPC" class="form-label">Fecha de actualización del IPC:</label>
+                    <input type="date" class="form-control" id="fechaActualizacionIPC" name="fechaActualizacionIPC" th:value="${piso.fechaActualizacionIPC}" required>
+                </div>
+            </div>
+
+            <!-- Ingresos -->
+            <div class="section">
+                <h2 class="text-center">Ingresos</h2>
+                <div class="mb-3">
+                    <label for="ingresoMensual" class="form-label">Ingreso Mensual:</label>
+                    <input type="number" class="form-control" id="ingresoMensual" name="ingresoMensual" th:value="${piso.ingresoMensual}" required>
+                </div>
+            </div>
+
+            <!-- Gastos -->
+            <div class="section">
+                <h2 class="text-center">Gastos</h2>
+                <div class="mb-3">
+                    <label for="comunidad" class="form-label">Comunidad:</label>
+                    <input type="number" class="form-control" id="comunidad" name="comunidad" th:value="${piso.comunidad}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="ibi" class="form-label">IBI:</label>
+                    <input type="number" class="form-control" id="ibi" name="ibi" th:value="${piso.ibi}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="seguro" class="form-label">Seguro:</label>
+                    <input type="number" class="form-control" id="seguro" name="seguro" th:value="${piso.seguro}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="reforma" class="form-label">Reforma:</label>
+                    <input type="number" class="form-control" id="reforma" name="reforma" th:value="${piso.reforma}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="averias" class="form-label">Averías:</label>
+                    <input type="number" class="form-control" id="averias" name="averias" th:value="${piso.averias}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="agua" class="form-label">Agua:</label>
+                    <input type="number" class="form-control" id="agua" name="agua" th:value="${piso.agua}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="luz" class="form-label">Luz:</label>
+                    <input type="number" class="form-control" id="luz" name="luz" th:value="${piso.luz}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="gas" class="form-label">Gas:</label>
+                    <input type="number" class="form-control" id="gas" name="gas" th:value="${piso.gas}" required>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+</body>
+</html>
