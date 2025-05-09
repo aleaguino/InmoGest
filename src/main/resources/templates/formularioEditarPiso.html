@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Piso</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        body {
+            background: linear-gradient(180deg, #e0f7fa, #005f73);
+            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            padding-top: 60px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .navbar {
+            background: #028090;
+            padding: 0.75rem 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand img {
+            height: 40px;
+        }
+        .navbar-brand span {
+            font-size: 1.5rem;
+            margin-left: 10px;
+            color: #fff;
+            font-family: 'Lobster', cursive;
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #333 !important;
+        }
+        .navbar-nav .nav-item:last-child {
+            margin-left: auto;
+        }
+        .main-content {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 40px; /* Ajuste de padding */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            margin: auto;
+            width: 100%;
+            max-width: 1000px; /* Ajuste del ancho máximo */
+        }
+        .btn-primary, .btn-secondary {
+            font-size: 1.25rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background-color: #028090;
+            border-color: #028090;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+        }
+        .btn-secondary {
+            background-color: #00a896;
+            border-color: #00a896;
+        }
+        .btn-secondary:hover {
+            transform: scale(1.05);
+        }
+        .footer {
+            background: #028090;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: auto; /* Asegura que el footer esté al final de la página */
+        }
+        .section {
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            background-color: #f8f9fa;
+        }
+        .section h2 {
+            margin-bottom: 15px;
+        }
+        .header-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .header-title img {
+            height: 60px;
+            margin-right: 10px;
+        }
+        .header-title h1 {
+            margin: 0;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" aria-current="page" th:href="@{/piso/piso}">
+                <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
+                <span>InmoGest</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/grafica}">Grafica</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/mapa}">Mapa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/calculadora}">Calculadora</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/editar}">Cambiar Contraseña</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/contacta}">Contacta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/logout}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+        <div class="row header-title">
+            <div class="col text-center">
+                <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
+                <h1>Modificar Piso</h1>
+            </div>
+        </div>
+        
+        <form method="post" th:action="@{/piso/modificar/{id}(id=${piso.id})}">
+            <!-- Datos Generales -->
+            <div class="section">
+                <h2 class="text-center">Datos Generales</h2>
+                <div class="mb-3">
+                    <label for="ciudad" class="form-label">Ciudad:</label>
+                    <input type="text" class="form-control" id="ciudad" name="ciudad" th:value="${piso.ciudad}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="ubicacion" class="form-label">Dirección:</label>
+                    <input type="text" class="form-control" id="ubicacion" name="ubicacion" th:value="${piso.ubicacion}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="anno" class="form-label">Año de construcción:</label>
+                    <input type="number" class="form-control" id="anno" name="anno" th:value="${piso.anno}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="precio" class="form-label">Precio de compra:</label>
+                    <input type="number" class="form-control" id="precio" name="precio" th:value="${piso.precio}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="estado" class="form-label">Estado (Libre/Alquilado):</label>
+                    <select id="estado" name="estado" class="form-select" th:value="${piso.estado}" required>
+                        <option value="" disabled>Seleccione el estado</option>
+                        <option value="Libre">Libre</option>
+                        <option value="Alquilado">Alquilado</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Datos del Inquilino -->
+            <div class="section">
+                <h2 class="text-center">Datos del Inquilino</h2>
+                <div class="mb-3">
+                    <label for="inquilinoNombre" class="form-label">Nombre del Inquilino:</label>
+                    <input type="text" class="form-control" id="inquilinoNombre" name="inquilinoNombre" th:value="${piso.inquilinoNombre}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="inquilinoDNI" class="form-label">DNI del Inquilino:</label>
+                    <input type="text" class="form-control" id="inquilinoDNI" name="inquilinoDNI" th:value="${piso.inquilinoDNI}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="inquilinoIBAN" class="form-label">IBAN del Inquilino:</label>
+                    <input type="text" class="form-control" id="inquilinoIBAN" name="inquilinoIBAN" th:value="${piso.inquilinoIBAN}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="porcentajeIPC" class="form-label">Porcentaje a subir de IPC:</label>
+                    <input type="number" class="form-control" id="porcentajeIPC" name="porcentajeIPC" th:value="${piso.porcentajeIPC}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="fechaActualizacionIPC" class="form-label">Fecha de actualización del IPC:</label>
+                    <input type="date" class="form-control" id="fechaActualizacionIPC" name="fechaActualizacionIPC" th:value="${piso.fechaActualizacionIPC}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="observacion" class="form-label">Observación del inquilino:</label>
+                    <input type="text" class="form-control" id="observacion" name="observacion" th:value="${piso.observacion}" required>
+                </div>
+            </div>
+
+            <!-- Ingresos -->
+            <div class="section">
+                <h2 class="text-center">Ingresos</h2>
+                <div class="mb-3">
+                    <label for="ingresoMensual" class="form-label">Ingreso Mensual:</label>
+                    <input type="number" class="form-control" id="ingresoMensual" name="ingresoMensual" th:value="${piso.ingresoMensual}" required>
+                </div>
+            </div>
+
+            <!-- Gastos -->
+            <div class="section">
+                <h2 class="text-center">Gastos</h2>
+                <div class="mb-3">
+                    <label for="comunidad" class="form-label">Comunidad:</label>
+                    <input type="number" class="form-control" id="comunidad" name="comunidad" th:value="${piso.comunidad}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="ibi" class="form-label">IBI:</label>
+                    <input type="number" class="form-control" id="ibi" name="ibi" th:value="${piso.ibi}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="seguro" class="form-label">Seguro:</label>
+                    <input type="number" class="form-control" id="seguro" name="seguro" th:value="${piso.seguro}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="reforma" class="form-label">Reforma:</label>
+                    <input type="number" class="form-control" id="reforma" name="reforma" th:value="${piso.reforma}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="averias" class="form-label">Averías:</label>
+                    <input type="number" class="form-control" id="averias" name="averias" th:value="${piso.averias}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="agua" class="form-label">Agua:</label>
+                    <input type="number" class="form-control" id="agua" name="agua" th:value="${piso.agua}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="luz" class="form-label">Luz:</label>
+                    <input type="number" class="form-control" id="luz" name="luz" th:value="${piso.luz}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="gas" class="form-label">Gas:</label>
+                    <input type="number" class="form-control" id="gas" name="gas" th:value="${piso.gas}" required>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                <a th:href="@{/piso/piso}" class="btn btn-secondary">Volver a Mis Pisos</a>
+            </div>
+        </form>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 InmoGest. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+</body>
+</html>

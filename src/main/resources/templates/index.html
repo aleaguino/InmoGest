@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>InmoGest - Gestión de Inmuebles</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(180deg, #e0f7fa, #005f73);
+            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            padding-top: 60px;
+        }
+        .navbar {
+            background: #028090;
+            padding: 0.75rem 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand img {
+            height: 40px;
+        }
+        .navbar-brand span {
+            font-size: 1.5rem;
+            margin-left: 10px;
+            color: #fff;
+            font-family: 'Lobster', cursive;
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #000 !important;
+        }
+        .main-content {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            max-width: 1350px;
+        }
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .hero-section img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .hero-section img.active {
+            opacity: 1;
+        }
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 2;
+        }
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .hero-content p {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+        }
+        .hero-content .btn {
+            font-size: 1.25rem;
+            margin: 5px;
+        }
+        .triptych-item {
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 250px;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .triptych-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            z-index: 1;
+        }
+        .triptych-item h2, .triptych-item p {
+            position: relative;
+            z-index: 2;
+        }
+        .triptych-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+        .admin-prop {
+            background-image: url('/assets/propiedades.png');
+        }
+        .seg-mant {
+            background-image: url('/assets/seguimiento.jpg');
+        }
+        .inter-clients {
+            background-image: url('/assets/cifrado.jpg');
+        }
+        .personalization {
+            background-image: url('/assets/perso.png');
+        }
+        .security {
+            background-image: url('/assets/seguridad.png');
+        }
+        .collaboration {
+            background-image: url('/assets/inversion.jpg');
+        }
+        .btn-primary {
+            font-size: 1.25rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-bottom: 20px;
+            background-color: #028090;
+            border-color: #028090;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .footer {
+            background: #028090;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .header-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .header-title img {
+            height: 60px;
+            margin-right: 20px;
+        }
+        .header-title h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 3rem;
+            color: #000;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" aria-current="page" th:href="@{/}">
+                <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
+                <span>InmoGest</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/login}">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container main-content">
+        <div class="row header-title">
+            <div class="col text-center">
+                <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
+                <h1>Bienvenidos a InmoGest - Gestión de Inmuebles</h1>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero-section mt-5">
+            <div class="hero-content" id="hero-content">
+                <h1>Acceso Completo</h1>
+                <p>Con nuestra herramienta tendrá el acceso completo a los datos acerca de sus inmuebles.</p>
+                <a href="/login" class="btn btn-primary">Iniciar Sesión</a>
+            </div>
+            <img src="/assets/contacto.png" alt="Acceso Completo" class="active">
+            <img src="/assets/analisis.jpg" alt="Estudios de Mercados" class="inactive">
+            <img src="/assets/gestor.png" alt="Gestión Eficiente" class="inactive">
+        </div>
+
+        <!-- Recomendaciones de webs -->
+        <div class="row mt-5">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="https://datos.gob.es/sites/default/files/styles/success_image/public/success/images/idealista.jpg?itok=uX21SrOq" class="card-img-top" alt="Idealista">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Idealista</h5>
+                        <p class="card-text">La web número 1 en búsqueda de propiedades.</p>
+                        <a href="https://www.idealista.com/" class="btn btn-primary mt-auto">Visítalos</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Logo_Fotocasa.png" class="card-img-top" alt="Fotocasa">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Fotocasa</h5>
+                        <p class="card-text">Una muy buena alternativa en la que encontrar inmuebles.</p>
+                        <a href="https://www.fotocasa.es/es/" class="btn btn-primary mt-auto">Visítalos</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="https://cdn.terrenos.es/website_logo/0024/08/c679b308055597a5b0d3f8da70ce6c2a0db1e81e.jpg" class="card-img-top" alt="Servihabitat">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Servihabitat</h5>
+                        <p class="card-text">Gran página para descubrir y aprender sobre inmuebles.</p>
+                        <a href="https://www.servihabitat.com/es/" class="btn btn-primary mt-auto">Visítalos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-4 mb-4">
+                <div class="triptych-item text-center admin-prop">
+                    <h2>Administración de Propiedades</h2>
+                    <p>Administra tus propiedades de manera eficiente. Gestiona alquileres, ventas y mantenimiento fácilmente.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="triptych-item text-center seg-mant">
+                    <h2>Seguimiento y Mantenimiento</h2>
+                    <p>Supervisa el estado de tus inmuebles, realiza mantenimiento preventivo y asegúrate de su correcto funcionamiento.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="triptych-item text-center inter-clients">
+                    <h2>Interacción con Clientes</h2>
+                    <p>Ofrece un entorno seguro para la información sensible. Protege la privacidad y evita vulnerabilidades.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-4 mb-4">
+                <div class="triptych-item text-center personalization">
+                    <h2>Personalización</h2>
+                    <p>Adapta InmoGest a tus necesidades, personaliza los datos y las vistas según tus preferencias.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="triptych-item text-center security">
+                    <h2>Seguridad</h2>
+                    <p>Protege la información sensible de tus clientes y garantiza la seguridad de las transacciones.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="triptych-item text-center collaboration">
+                    <h2>Colaboración</h2>
+                    <p>Facilita la colaboración entre los usuarios, permitiendo la compartición de información y recursos.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/2d6rT234l6Y?si=C_xhQY7XGPyGwB6O" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 InmoGest. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script>
+        const images = document.querySelectorAll('.hero-section img');
+        const heroContent = document.getElementById('hero-content');
+        const contents = [
+            {
+                title: "Acceso Completo",
+                text: "Con nuestra herramienta tendrá el acceso completo a los datos acerca de sus inmuebles.",
+                link: "/login"
+            },
+            {
+                title: "Estudios de Mercados",
+                text: "Confíe en nuestros exhaustivos estudios de mercado inmobiliario, complementados con análisis cartográficos detallados.",
+                link: "/login"
+            },
+            {
+                title: "Gestión Eficiente",
+                text: "Administra tus propiedades de manera eficiente con nuestra herramienta.",
+                link: "/login"
+            }
+        ];
+        let currentIndex = 0;
+
+        setInterval(() => {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+            
+            heroContent.querySelector('h1').textContent = contents[currentIndex].title;
+            heroContent.querySelector('p').textContent = contents[currentIndex].text;
+            heroContent.querySelector('a').setAttribute('href', contents[currentIndex].link);
+        }, 5000);
+    </script>
+</body>
+</html>

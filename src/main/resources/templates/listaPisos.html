@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Pisos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(180deg, #e0f7fa, #005f73);
+            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            padding-top: 60px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .navbar {
+            background: #028090;
+            padding: 0.75rem 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand img {
+            height: 40px;
+        }
+        .navbar-brand span {
+            font-size: 1.5rem;
+            margin-left: 10px;
+            color: #fff;
+            font-family: 'Lobster', cursive;
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #000 !important;
+        }
+        .main-content {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            max-width: 1350px;
+            flex: 1;
+        }
+        .btn {
+            font-size: 0.875rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-bottom: 5px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .btn-success:hover {
+            background-color: #218838;
+        }
+        .btn-outline-success {
+            color: #28a745;
+            border-color: #28a745;
+        }
+        .btn-outline-success:hover {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .header-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .header-title img {
+            height: 60px;
+            margin-right: 10px;
+        }
+        .header-title h1 {
+            margin: 0;
+            font-weight: 700;
+            color: #333;
+            font-size: 1.5rem;
+        }
+        .table {
+            margin-top: 10px;
+            width: 100%;
+            table-layout: fixed;
+        }
+        .table thead {
+            background: #028090;
+            color: #fff;
+        }
+        .table thead th {
+            text-align: center;
+            font-weight: 700;
+        }
+        .table-hover tbody tr:hover {
+            background: #f0f2f5;
+        }
+        .table tbody td {
+            vertical-align: middle;
+            text-align: center;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            padding: 0.2rem;
+        }
+        .table tbody td .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+        .footer {
+            background: #028090;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .totals {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .totals div {
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+        .income {
+            color: #28a745;
+        }
+        .expense {
+            color: #dc3545;
+        }
+        .difference {
+            font-weight: bold;
+        }
+        .search-input {
+            height: 40px;
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            border: 1px solid #ccc;
+            transition: border 0.3s ease;
+        }
+        .search-input:focus {
+            border: 1px solid #028090;
+        }
+        .triptych-item {
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 250px;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            cursor: pointer; /* Añadido */
+        }
+        .triptych-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            z-index: 1;
+        }
+        .triptych-item h2, .triptych-item p {
+            position: relative;
+            z-index: 2;
+        }
+        .triptych-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+        .admin-prop {
+            background-image: url('/assets/compraventas.jpg');
+        }
+        .seg-mant {
+            background-image: url('/assets/inversion.png');
+        }
+        .inter-clients {
+            background-image: url('/assets/feedback.jpg');
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" aria-current="page" th:href="@{/}">
+                <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
+                <span>InmoGest</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/grafica}">Grafica</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/mapa}">Mapa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/calculadora}">Calculadora</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/editar}">Cambiar Contraseña</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/contacta}">Contacta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/logout}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container main-content">
+        <div class="row header-title">
+            <div class="col text-center">
+                <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
+                <h1>Lista de Inmuebles</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <h2 th:text="${usuario.username}" class="text-center mb-4"></h2>
+                <form th:action="@{/piso/buscar}" method="get" class="d-flex mb-4" id="searchForm">
+                    <input class="form-control me-2 search-input" type="search" placeholder="Buscar por dirección" name="direccion" th:value="${direccion}" id="searchInput">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+                <table class="table table-striped table-hover">
+                    <thead class="text-center">
+                        <tr>
+                            <th>Ciudad</th>
+                            <th>Dirección</th>
+                            <th>Año</th>
+                            <th>Estado</th>
+                            <th>Ingreso Mensual</th>
+                            <th>Gastos Mensuales</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr th:each="piso : ${pisos}">
+                            <td th:text="${piso.ciudad}"></td>
+                            <td th:text="${piso.ubicacion}"></td>
+                            <td th:text="${piso.anno}"></td>
+                            <td th:text="${piso.estado}"></td>
+                            <td th:text="${piso.ingresoMensual}"></td>
+                            <td th:text="${piso.comunidad + piso.ibi + piso.seguro + piso.agua + piso.luz + piso.gas}"></td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a class="btn btn-primary" th:href="@{/piso/modificar/{id}(id=${piso.id})}">Editar</a>
+                                    <button type="button" class="btn btn-danger" th:attr="onclick=|eliminarPiso('${piso.id}')|">Borrar</button>
+                                    <a class="btn btn-warning" th:href="@{/piso/detalles/{id}(id=${piso.id})}">Detalles</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-center">
+                    <a th:href="@{/piso/formulario}" class="btn btn-success">Agregar Inmueble</a>
+                </div>
+                <div class="totals mt-4">
+                    <div class="income">Total Ingresos: <span th:text="${totalIngresos}"></span></div>
+                    <div class="expense">Total Gastos: <span th:text="${totalGastos}"></span></div>
+                    <div class="difference">Ingreso Neto: <span th:text="${diferencia}"></span></div>
+                </div>
+            </div>
+        </div>
+        <!-- Tres nuevas cards -->
+        <div class="row mt-5">
+            <div class="col-md-4 mb-4">
+                <div class="triptych-item text-center admin-prop" onclick="window.location.href='/piso/propiedades'">
+                    <h2>Compraventas en España</h2>
+                    <p>Consulta la gráfica de compraventas en diferentes ciudades de España. Esta información te ayudará a identificar las mejores oportunidades de inversión.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="triptych-item text-center seg-mant" onclick="window.location.href='https://earth.google.com/earth/d/1WN8LVSWrKDutk0UXYT13MhqdrQuurMMO?usp=sharing'">
+                    <h2>Mapa de Inversiones</h2>
+                    <p>Explora áreas con alta probabilidad de revalorización. Utiliza nuestro mapa interactivo en Google Earth para tomar decisiones informadas sobre tus inversiones.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="triptych-item text-center inter-clients" onclick="window.location.href='/feedback'">
+                    <h2>Enviar Feedback</h2>
+                    <p>Ayúdanos a mejorar. Deja tus comentarios y sugerencias sobre la aplicación para que podamos ofrecerte una mejor experiencia.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 InmoGest. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script>
+        function editarPiso(id) {
+            window.location.href = '/piso/modificar/' + id;
+            console.log('Editar piso con id:', id);
+        }
+
+        function eliminarPiso(id) {
+            if (confirm('¿Estás seguro de que deseas eliminar este piso con id ' + id + '?')) {
+                window.location.href = '/piso/eliminar/' + id;
+                console.log('Eliminar piso con id:', id);
+            }
+        }
+
+        function detallesPiso(id) {
+            window.location.href = '/piso/detalles/' + id;
+            console.log('Ver los detalles del piso con id:', id);
+        }
+    </script>
+    <script>
+    document.getElementById('searchInput').addEventListener('input', function() {
+        if (this.value === '') {
+            document.getElementById('searchForm').submit();
+        }
+    });
+    </script>
+</body>
+</html>
