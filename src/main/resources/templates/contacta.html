@@ -162,6 +162,20 @@
                         <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
                     </div>
                 </form>
+                <hr>
+                <div class="mt-4">
+                    <h4>¿Quieres ser admin?</h4>
+                    <form th:action="@{/contacta/conviertete-admin}" method="post">
+                        <div class="mb-3">
+                            <label for="fraseAdmin" class="form-label">Introduce la frase secreta:</label>
+                            <input type="text" class="form-control" id="fraseAdmin" name="fraseAdmin" required>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-warning">Conviértete en admin</button>
+                        </div>
+                        <div th:if="${errorAdmin}" class="alert alert-danger mt-2" th:text="${errorAdmin}"></div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

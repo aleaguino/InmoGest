@@ -120,6 +120,12 @@
             <div class="col-md-12">
                 <div class="card shadow">
                     <div class="card-body">
+    <div id="pendienteAlert" style="display:none;" class="alert alert-danger text-center fw-bold" role="alert">
+    Tu cuenta aún no está activa. Un administrador debe habilitarla para que puedas acceder.
+</div>
+    <div th:if="${#httpServletRequest.getParameter('forbidden')} == 'true'" class="alert alert-danger text-center" role="alert">
+        Tu sesión ha expirado o no tienes permisos para acceder a esa página. Por favor, inicia sesión de nuevo.
+    </div>
                         <form th:action="@{/login}" method="post">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Usuario:</label>
@@ -179,6 +185,16 @@
                 icon.classList.add('bi-eye-fill');
             }
         });
+        // Mostrar alert si la URL contiene ?admin=true
+        if (window.location.search.indexOf('admin=true') !== -1) {
+            alert('¡Ya eres admin! Inicia sesión para acceder a la administración.');
+        }
+        if (window.location.search.indexOf('pendiente=true') !== -1) {
+            var pendienteDiv = document.getElementById('pendienteAlert');
+            if (pendienteDiv) {
+                pendienteDiv.style.display = 'block';
+            }
+        }
     </script>
 </body>
 </html>

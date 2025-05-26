@@ -19,13 +19,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-
+/**
+ *
+ * @author aguilar
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "usuarios")
 public class Usuario implements Serializable {
+
+    private boolean activo = false;
+
+    @Column(nullable = false)
+    private String rol = "USUARIO";
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,6 +69,22 @@ public class Usuario implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
 }

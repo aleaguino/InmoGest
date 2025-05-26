@@ -3,6 +3,7 @@ package InmoGest.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,7 +26,14 @@ public class UsuarioService implements UserDetailsService {
         if (usuario == null) {
             throw new UsernameNotFoundException("Usuario no encontrado: " + username);
         }
-        return new User(usuario.getUsername(), usuario.getPassword(), new ArrayList<>());
+        // Solo los usuarios normales deben estar activos para poder iniciar sesión
+        if (!usuario.isActivo() && !"ADMIN".equals(usuario.getRol())) {
+            throw new org.springframework.security.authentication.DisabledException("El usuario no está habilitado");
+        }
+        
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(usuario.getRol()));
+        return new User(usuario.getUsername(), usuario.getPassword(), authorities);
     }
 
     public Usuario findByUsername(String username) {
@@ -67,5 +75,22 @@ public class UsuarioService implements UserDetailsService {
     public void save(Usuario usuario) {
         usuarioRepository.save(usuario);
     }
-}
 
+    public void eliminarUsuario(Long id) {
+        usuarioRepository.deleteById(id);
+    }
+
+    public void inhabilitarUsuario(Long id) {
+        Usuario usuario = usuarioRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
+        usuario.setActivo(false);
+        usuarioRepository.save(usuario);
+    }
+
+    public void habilitarUsuario(Long id) {
+        Usuario usuario = usuarioRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
+        usuario.setActivo(true);
+        usuarioRepository.save(usuario);
+    }
+}

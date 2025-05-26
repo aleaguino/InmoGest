@@ -10,8 +10,51 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class UsuarioController {
+
+    // Listar todos los usuarios (solo admin)
+    @GetMapping("/admin/usuarios")
+    public String listarUsuarios(Model model) {
+        List<Usuario> todos = usuarioService.obtenerTodosLosUsuarios();
+        List<Usuario> admins = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<>();
+        for (Usuario u : todos) {
+            if ("ADMIN".equals(u.getRol())) {
+                admins.add(u);
+            } else {
+                usuarios.add(u);
+            }
+        }
+        model.addAttribute("admins", admins);
+        model.addAttribute("usuarios", usuarios);
+        return "admin/listaUsuarios";
+    }
+
+    // Eliminar usuario (solo admin)
+    @PostMapping("/admin/usuarios/eliminar")
+    public String eliminarUsuario(@RequestParam Long id) {
+        usuarioService.eliminarUsuario(id);
+        return "redirect:/admin/usuarios";
+    }
+
+    // Inhabilitar usuario (solo admin)
+    @PostMapping("/admin/usuarios/inhabilitar")
+    public String inhabilitarUsuario(@RequestParam Long id) {
+        usuarioService.inhabilitarUsuario(id);
+        return "redirect:/admin/usuarios";
+    }
+
+    // Habilitar usuario (solo admin)
+    @PostMapping("/admin/usuarios/habilitar")
+    public String habilitarUsuario(@RequestParam Long id) {
+        usuarioService.habilitarUsuario(id);
+        return "redirect:/admin/usuarios";
+    }
+
 
     @Autowired
     private UsuarioService usuarioService;
