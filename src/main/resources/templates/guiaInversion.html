@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Guía de Inversión - InmoGest</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(180deg, #e0f7fa, #005f73);
+            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            padding-top: 60px;
+            min-height: 100vh;
+        }
+        .navbar {
+            background: #028090;
+            padding: 0.75rem 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand img {
+            height: 40px;
+        }
+        .navbar-brand span {
+            font-size: 1.5rem;
+            margin-left: 10px;
+            color: #fff;
+            font-family: 'Lobster', cursive;
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #000 !important;
+        }
+        .main-content {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 20px 32px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            max-width: 1350px;
+            flex: 1;
+        }
+        .table thead {
+            background: #028090;
+            color: #fff;
+        }
+        .table thead th {
+            text-align: center;
+            font-weight: 700;
+        }
+        .table tbody td {
+            vertical-align: middle;
+            text-align: center;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            padding: 0.2rem;
+        }
+        .form-check-input:checked {
+            background-color: #028090;
+            border-color: #028090;
+        }
+        .accordion-button:focus {
+            box-shadow: 0 0 0 0.2rem #02809055;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/piso/piso}">
+            <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
+            <span>InmoGest</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarInversiones" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Inversiones en Bolsa
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarInversiones">
+                        <li><a class="dropdown-item" th:href="@{/guia-inversion}">Guía de Inversión</a></li>
+                        <li><a class="dropdown-item" th:href="@{/creador-fondos}">Creador de Fondos</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="main-content">
+    <section class="guide-section">
+        <h1 class="mb-4">Guía Completa de Inversión en Bolsa</h1>
+        <div class="info-box">
+            <b>¿Por qué invertir en bolsa?</b><br>
+            Invertir en bolsa es una de las formas más eficaces de hacer crecer tu patrimonio a largo plazo. Permite aprovechar el crecimiento económico global y beneficiarse del interés compuesto. Sin embargo, es fundamental conocer los productos disponibles y sus características para tomar decisiones informadas.
+        </div>
+    </section>
+
+    <section class="guide-section">
+        <h2>Comparativa: Fondos Indexados vs ETFs vs Acciones</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered comparison-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Fondos Indexados</th>
+                        <th>ETFs</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>¿Qué es?</td><td>Fondo que replica un índice bursátil (ej: S&P 500, MSCI World).</td><td>Fondo cotizado en bolsa que replica un índice, sector o materia prima.</td><td>Participación directa en una empresa cotizada.</td></tr>
+                    <tr><td>Liquidez</td><td>Media (reembolsos en 1-3 días)</td><td>Alta (compra/venta en tiempo real)</td><td>Alta (compra/venta en tiempo real)</td></tr>
+                    <tr><td>Comisiones</td><td>Bajas (0,1%-0,4%)</td><td>Bajas (0,1%-0,5%)</td><td>Variable según bróker y mercado</td></tr>
+                    <tr><td>Fiscalidad</td><td>Ventajosa en España: permite traspasos sin tributar hasta el reembolso final</td><td>No permite traspasos sin tributar</td><td>Dividendos y plusvalías tributan cada vez que se venden</td></tr>
+                    <tr><td>Riesgo</td><td>Medio (diversificación por índices)</td><td>Medio (diversificación por índices)</td><td>Alto (depende de cada empresa)</td></tr>
+                    <tr><td>Accesibilidad</td><td>Alta (desde 1€ en muchos bancos y plataformas)</td><td>Alta (desde 1 acción)</td><td>Alta (desde 1 acción)</td></tr>
+                    <tr><td>Gestión</td><td>Pasiva</td><td>Pasiva</td><td>Activa (debes elegir y gestionar tus empresas)</td></tr>
+                    <tr><td>Ideal para</td><td>Inversores a largo plazo, principiantes y quienes buscan simplicidad</td><td>Inversores que desean flexibilidad y operativa intradía</td><td>Inversores experimentados que buscan rentabilidad extra asumiendo más riesgo</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="guide-section">
+        <h2>¿Qué son los Fondos Indexados?</h2>
+        <p>Los fondos indexados son productos de inversión colectiva que replican un índice bursátil. Esto significa que invierten en todas (o casi todas) las empresas que componen ese índice, en la misma proporción. Son gestionados de forma pasiva, lo que reduce costes y comisiones. Sus ventajas principales son:</p>
+        <ul>
+            <li><b>Diversificación automática:</b> con una sola inversión accedes a cientos o miles de empresas.</li>
+            <li><b>Bajas comisiones:</b> al no requerir gestión activa, los gastos son mínimos.</li>
+            <li><b>Fiscalidad favorable en España:</b> puedes traspasar tu inversión entre fondos sin tributar hasta el reembolso final.</li>
+            <li><b>Ideal para largo plazo:</b> históricamente los índices han crecido a largo plazo, superando a la mayoría de gestores activos.</li>
+        </ul>
+        <p><b>¿Cuándo elegir fondos indexados?</b> Si buscas simplicidad, bajas comisiones y una estrategia de inversión a largo plazo sin preocuparte por elegir empresas concretas.</p>
+    </section>
+
+    <section class="guide-section">
+        <h2>¿Qué son los ETFs?</h2>
+        <p>Los ETFs (Exchange Traded Funds) son fondos que cotizan en bolsa como si fueran acciones. Replican índices, sectores o materias primas, y pueden comprarse y venderse en cualquier momento durante la sesión bursátil. Ventajas y desventajas:</p>
+        <ul>
+            <li><b>Liquidez:</b> puedes comprar y vender en tiempo real.</li>
+            <li><b>Bajas comisiones:</b> similares a los fondos indexados.</li>
+            <li><b>No permiten traspasos fiscales en España:</b> cada venta tributa por plusvalías.</li>
+            <li><b>Flexibilidad:</b> permiten estrategias de inversión más avanzadas (stop loss, operativa intradía, etc).</li>
+        </ul>
+        <p><b>¿Cuándo elegir ETFs?</b> Si quieres flexibilidad, operar en tiempo real o acceder a mercados o sectores que no están disponibles en fondos tradicionales.</p>
+    </section>
+
+    <section class="guide-section">
+        <h2>¿Qué implica invertir en Acciones?</h2>
+        <p>Invertir en acciones es comprar participaciones de empresas cotizadas. Ofrece potencial de alta rentabilidad, pero también mayor riesgo y requiere seguimiento. Características:</p>
+        <ul>
+            <li><b>Potencial de rentabilidad alto:</b> puedes obtener grandes beneficios si eliges bien las empresas.</li>
+            <li><b>Mayor riesgo:</b> la cotización depende de una sola empresa.</li>
+            <li><b>Gestión activa:</b> debes analizar y decidir cuándo comprar o vender.</li>
+            <li><b>Dividendos:</b> algunas empresas reparten parte de sus beneficios.</li>
+        </ul>
+        <p><b>¿Cuándo elegir acciones?</b> Si tienes experiencia, tiempo para analizar empresas y buscas rentabilidad extra asumiendo más riesgo.</p>
+    </section>
+
+    <section class="guide-section">
+        <h2>¿En qué invertir?</h2>
+        <p>La decisión depende de tu perfil de riesgo, horizonte temporal y conocimientos:</p>
+        <ul>
+            <li><b>Principiantes:</b> Fondos indexados diversificados globalmente (ejemplo: MSCI World, S&P 500).</li>
+            <li><b>Intermedios:</b> ETFs para diversificar sectores o regiones específicas.</li>
+            <li><b>Avanzados:</b> Acciones individuales, buscando oportunidades concretas y asumiendo más riesgo.</li>
+        </ul>
+        <p>Recuerda: la clave está en la diversificación, la paciencia y evitar dejarse llevar por las emociones.</p>
+    </section>
+
+    <section class="guide-section">
+        <h2>Recursos útiles</h2>
+        <ul class="resources-list">
+            <li><a href="https://www.rankia.com/blog/mejores-fondos-indexados" target="_blank">Mejores fondos indexados (Rankia)</a></li>
+            <li><a href="https://inbestme.com/es/blog/que-es-un-etf/" target="_blank">¿Qué es un ETF? (InbestMe)</a></li>
+            <li><a href="https://www.finect.com/usuario/bolsazone/articulos/como-invertir-en-acciones" target="_blank">Cómo invertir en acciones (Finect)</a></li>
+        </ul>
+    </section>
+
+    <section class="guide-section">
+        <h2>Top 25 acciones más rentables de 2024</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover" id="tabla-acciones">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Rentabilidad</th>
+            <th>Sector</th>
+        </tr>
+    </thead>
+    <tbody id="tabla-acciones-tbody">
+        <!-- Aquí se insertarán las filas desde JS -->
+    </tbody>
+</table>
+        </div>
+    </section>
+
+<section class="guide-section">
+    <h2>Conclusión</h2>
+    <div class="info-box">
+        <b>Invertir con éxito es una carrera de fondo, no un sprint.</b><br>
+        La clave está en la diversificación, la paciencia y la formación continua. Elige productos que se adapten a tu perfil y horizonte temporal, evita tomar decisiones impulsivas y revisa periódicamente tu estrategia. Recuerda: el mejor momento para empezar a invertir es hoy, y la mejor herramienta es el conocimiento.
+    </div>
+</section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Cargar y mostrar el top 25 de acciones desde acciones2024.json
+fetch('/acciones2024.json')
+  .then(response => response.json())
+  .then(data => {
+    const tbody = document.getElementById('tabla-acciones-tbody');
+    tbody.innerHTML = '';
+    data.forEach(accion => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${accion.nombre}</td><td>${accion.rentabilidad}</td><td>${accion.sector}</td>`;
+      tbody.appendChild(tr);
+    });
+  })
+  .catch(err => {
+    document.getElementById('tabla-acciones-tbody').innerHTML = '<tr><td colspan="3">No se pudieron cargar los datos de acciones.</td></tr>';
+  });
+</script>
+</body>
+</html>

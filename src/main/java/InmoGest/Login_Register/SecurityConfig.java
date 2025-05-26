@@ -27,34 +27,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-        .antMatchers("/admin/**").hasAuthority("ADMIN")
-        .antMatchers("/", "/recuperar", "/cambiarContraseña","/registro", "/assets/**", "/static/**", "/css/**", "/js/**", "/images/**").permitAll()
-        .anyRequest().authenticated()
-        .and()
-        .formLogin()
-            .loginPage("/login")
-            .successHandler((request, response, authentication) -> {
-                boolean isAdmin = authentication.getAuthorities().stream()
-                    .anyMatch(a -> a.getAuthority().equals("ADMIN"));
-                if (isAdmin) {
-                    response.sendRedirect("/admin/usuarios");
-                } else {
-                    response.sendRedirect("/piso/piso");
-                }
-            })
-            .failureHandler((request, response, exception) -> {
-                if (exception instanceof org.springframework.security.authentication.DisabledException) {
-                    response.sendRedirect("/login?pendiente=true");
-                } else {
-                    response.sendRedirect("/login?error=true");
-                }
-            })
-            .permitAll()
-        .and()
-        .logout()
-            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            .permitAll();
+        // SOLO PARA DESARROLLO: permite POST sin autenticación ni CSRF a /api/fondos-indexados y /api/fondos
+        http.csrf().disable()
+            .authorizeRequests()
+            .antMatchers("/api/fondos-indexados", "/api/fondos").permitAll()
+            .antMatchers("/admin/**").hasAuthority("ADMIN")
+            .antMatchers("/", "/recuperar", "/cambiarContraseña","/registro", "/assets/**", "/static/**", "/css/**", "/js/**", "/images/**").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .formLogin()
+                .loginPage("/login")
+                .successHandler((request, response, authentication) -> {
+                    boolean isAdmin = authentication.getAuthorities().stream()
+                        .anyMatch(a -> a.getAuthority().equals("ADMIN"));
+                    if (isAdmin) {
+                        response.sendRedirect("/admin/usuarios");
+                    } else {
+                        response.sendRedirect("/piso/piso");
+                    }
+                })
+                .failureHandler((request, response, exception) -> {
+                    if (exception instanceof org.springframework.security.authentication.DisabledException) {
+                        response.sendRedirect("/login?pendiente=true");
+                    } else {
+                        response.sendRedirect("/login?error=true");
+                    }
+                })
+                .permitAll()
+            .and()
+            .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .permitAll();
+        // FIN SOLO DESARROLLO
     }
 
     @Bean

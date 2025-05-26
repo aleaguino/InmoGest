@@ -98,7 +98,7 @@
 <body>
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" aria-current="page" th:href="@{/piso/piso}">
+            <a class="navbar-brand" aria-current="page" th:href="@{/piso/lista}">
                 <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
                 <span>InmoGest</span>
             </a>
@@ -107,6 +107,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto">
+    <li class="nav-item" sec:authorize="hasRole('USUARIO')">
+        <a class="nav-link text-light" th:href="@{/fondos-indexados}">Fondos Indexados</a>
+    </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" aria-current="page" th:href="@{/piso/grafica}">Grafica</a>
                     </li>

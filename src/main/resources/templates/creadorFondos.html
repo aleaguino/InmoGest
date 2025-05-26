@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Creador de Fondos - InmoGest</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(180deg, #e0f7fa, #005f73);
+            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            padding-top: 60px;
+            min-height: 100vh;
+        }
+        .navbar {
+            background: #028090;
+            padding: 0.75rem 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand img {
+            height: 40px;
+        }
+        .navbar-brand span {
+            font-size: 1.5rem;
+            margin-left: 10px;
+            color: #fff;
+            font-family: 'Lobster', cursive;
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #000 !important;
+        }
+        .main-content {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 20px 32px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            max-width: 1350px;
+            flex: 1;
+        }
+        .table thead {
+            background: #028090;
+            color: #fff;
+        }
+        .table thead th {
+            text-align: center;
+            font-weight: 700;
+        }
+        .table tbody td {
+            vertical-align: middle;
+            text-align: center;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            padding: 0.2rem;
+        }
+        .form-check-input:checked {
+            background-color: #028090;
+            border-color: #028090;
+        }
+        .accordion-button:focus {
+            box-shadow: 0 0 0 0.2rem #02809055;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/piso/piso}">
+            <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
+            <span>InmoGest</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarInversiones" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Inversiones en Bolsa
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarInversiones">
+                        <li><a class="dropdown-item" th:href="@{/guia-inversion}">Guía de Inversión</a></li>
+                        <li><a class="dropdown-item" th:href="@{/creador-fondos}">Creador de Fondos</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="main-content">
+    <h2>Registro de Fondo Indexado</h2>
+    <form id="formFondos" class="mb-4">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre del fondo</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+        </div>
+        <div class="mb-3">
+            <label for="cantidad" class="form-label">Cantidad</label>
+            <input type="number" class="form-control" id="cantidad" name="cantidad" min="1" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Tipo de fondo</label><br>
+            <input type="radio" id="tipo1" name="tipo" value="ETF">
+            <label for="tipo1">ETF</label>
+            <input type="radio" id="tipo2" name="tipo" value="Indexado">
+            <label for="tipo2">Indexado</label>
+        </div>
+        <div class="mb-3">
+            <label for="pais" class="form-label">País</label>
+            <select class="form-select" id="pais" name="pais" required>
+                <option value="">Selecciona un país</option>
+                <option value="España">España</option>
+                <option value="Estados Unidos">Estados Unidos</option>
+                <option value="Alemania">Alemania</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="accionesFondo" class="form-label">Selecciona las acciones que compondrán tu fondo</label>
+            <select multiple class="form-select" id="accionesFondo" name="accionesFondo[]" required style="height: 250px;"></select>
+            <div class="form-text">Mantén pulsada Ctrl o Cmd para seleccionar varias acciones</div>
+        </div>
+        <div class="mb-3">
+            <span>País seleccionado: <span id="paisSeleccionado"></span></span>
+        </div>
+        <div class="mb-3">
+            <div class="accordion" id="acordeonTerminos">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTerminos">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTerminos" aria-expanded="false" aria-controls="collapseTerminos">
+                            Términos y condiciones
+                        </button>
+                    </h2>
+                    <div id="collapseTerminos" class="accordion-collapse collapse" aria-labelledby="headingTerminos" data-bs-parent="#acordeonTerminos">
+                        <div class="accordion-body">
+                            <b>Importante:</b> Todos los fondos creados serán <span style="color: #007bff; font-weight: bold;">públicos</span> y visibles para todos los usuarios registrados en la plataforma.<br><br>
+                            Esto fomenta la <b>cohesión</b>, la <b>colaboración</b> y la <b>transparencia</b> entre los inversores. Podrás inspirarte en las estrategias de otros usuarios, compartir ideas y contribuir a una comunidad de inversión abierta, donde el conocimiento y las oportunidades se multiplican.<br><br>
+                            Crear fondos públicos ayuda a que todos aprendamos juntos y mejoremos nuestras decisiones financieras. ¡Juntos es más fácil alcanzar el éxito inversor!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-check mt-3">
+                <input class="form-check-input" type="checkbox" id="acepta" name="acepta">
+                <label class="form-check-label" for="acepta">
+                    Acepto los términos y condiciones
+                </label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar Fondo</button>
+    </form>
+    <div id="mensajeFondoIndexado"></div>
+
+    <h3 class="mt-5">Acciones disponibles para componer tu fondo</h3>
+    <div id="tabla-acciones-disponibles" class="mb-4"></div>
+
+    <h3 class="mt-5">Fondos públicos creados por la comunidad</h3>
+    <div class="table-responsive mt-3">
+        <table class="table table-bordered table-striped">
+            <thead class="table-primary">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Tipo</th>
+                    <th>País</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="fondo : ${fondos}">
+                    <td th:text="${fondo.nombre}"></td>
+                    <td th:text="${fondo.cantidad}"></td>
+                    <td th:text="${fondo.tipo}"></td>
+                    <td th:text="${fondo.pais}"></td>
+                    <td>
+                        <ul class="mb-0" style="list-style: none; padding-left: 0;">
+                            <li th:each="accion : ${fondo.acciones}" th:text="${accion}"></li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/fondosIndexados.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

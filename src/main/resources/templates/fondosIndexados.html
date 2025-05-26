@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Fondos Indexados - InmoGest</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(180deg, #e0f7fa, #005f73);
+            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            padding-top: 60px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .navbar {
+            background: #028090;
+            padding: 0.75rem 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand img {
+            height: 40px;
+        }
+        .navbar-brand span {
+            font-size: 1.5rem;
+            margin-left: 10px;
+            color: #fff;
+            font-family: 'Lobster', cursive;
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #000 !important;
+        }
+        .main-content {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 20px 32px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            max-width: 1350px;
+            flex: 1;
+        }
+        .fondos-card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            text-align: center;
+            padding: 25px 10px;
+            margin: 0 10px;
+        }
+        .fondos-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #0077b6;
+        }
+        .fondos-card h5 {
+            font-weight: bold;
+            color: #0077b6;
+        }
+        .fondos-card p {
+            font-size: 1rem;
+            color: #222;
+        }
+        .fondos-table th, .fondos-table td {
+            text-align: center;
+        }
+        .info-box {
+            background: #e0f7fa;
+            border-left: 5px solid #0077b6;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+        }
+        .guide-section {
+            margin-bottom: 2.5rem;
+        }
+        .guide-section h3 {
+            color: #028090;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        .comparison-table th {
+            background: #028090;
+            color: #fff;
+        }
+        .comparison-table td, .comparison-table th {
+            vertical-align: middle;
+        }
+        .resources-list a {
+            color: #0077b6;
+            text-decoration: underline;
+        }
+        .resources-list a:hover {
+            color: #023047;
+        }
+    </style>
+</head>
+    <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" aria-current="page" th:href="@{/piso/piso}">
+            <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
+            <span>InmoGest</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarInversiones" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Inversiones en Bolsa
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarInversiones">
+                        <li><a class="dropdown-item" th:href="@{/guia-inversion}">Guía de Inversión</a></li>
+                        <li><a class="dropdown-item" th:href="@{/creador-fondos}">Creador de Fondos</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/grafica}">Gráfica</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/mapa}">Mapa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/calculadora}">Calculadora</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/cambiar-contrasena}">Cambiar Contraseña</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/contacta}">Contacta</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <div class="main-content">
+
+        <!-- Comparativa de Fondos Indexados, ETFs y Acciones -->
+        <section class="guide-section">
+            <h2 class="mb-4">Comparativa: Fondos Indexados vs ETFs vs Acciones</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered comparison-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Fondos Indexados</th>
+                            <th>ETFs</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>¿Qué es?</td><td>Fondo que replica un índice bursátil.</td><td>Fondo cotizado en bolsa que replica un índice.</td><td>Participación directa en una empresa.</td></tr>
+                        <tr><td>Liquidez</td><td>Media</td><td>Alta (compra/venta en tiempo real)</td><td>Alta</td></tr>
+                        <tr><td>Comisiones</td><td>Bajas</td><td>Bajas</td><td>Variable</td></tr>
+                        <tr><td>Fiscalidad</td><td>Ventajosa en España (traspasos)</td><td>No permite traspasos</td><td>Dividendos y plusvalías</td></tr>
+                        <tr><td>Riesgo</td><td>Medio</td><td>Medio</td><td>Alto</td></tr>
+                        <tr><td>Accesibilidad</td><td>Alta</td><td>Alta</td><td>Alta</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Fondos Indexados -->
+        <section class="guide-section">
+            <h2>Fondos Indexados</h2>
+            <p>Los fondos indexados son vehículos de inversión colectiva que replican el comportamiento de un índice bursátil. Permiten diversificar y suelen tener comisiones muy bajas. Son ideales para estrategias a largo plazo y para quienes buscan simplicidad y eficiencia de costes.</p>
+        </section>
+
+        <!-- ETFs -->
+        <section class="guide-section">
+            <h2>ETFs (Fondos Cotizados)</h2>
+            <p>Los ETFs son fondos que cotizan en bolsa como una acción y replican índices, sectores o materias primas. Ofrecen flexibilidad, liquidez y bajos costes, pero su fiscalidad en España no permite traspasos entre ETFs sin tributar.</p>
+        </section>
+
+        <!-- Acciones -->
+        <section class="guide-section">
+            <h2>Acciones</h2>
+            <p>Invertir en acciones significa comprar participaciones de empresas. Ofrecen potencial de alta rentabilidad, pero también mayor riesgo y requieren más seguimiento y conocimientos.</p>
+            <div class="mb-4">
+                <h3>Top 25 acciones más rentables de 2024</h3>
+                <div id="tabla-acciones-rentables"></div>
+            </div>
+        </section>
+    </div>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" aria-current="page" th:href="@{/piso/piso}">
+                <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
+                <span>InmoGest</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item" sec:authorize="hasRole('USUARIO')">
+                        <a class="nav-link text-light" th:href="@{/fondos-indexados}">Fondos Indexados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/grafica}">Grafica</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/mapa}">Mapa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/calculadora}">Calculadora</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/editar}">Cambiar Contraseña</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/contacta}">Contacta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/logout}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<div class="main-content">
+    <h2>Formulario de Registro de Fondo</h2>
+<form id="formFondos" class="mb-4">
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre del fondo</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" required>
+    </div>
+    <div class="mb-3">
+        <label for="cantidad" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad" name="cantidad" min="1" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Tipo de fondo</label><br>
+        <input type="radio" id="tipo1" name="tipo" value="ETF">
+        <label for="tipo1">ETF</label>
+        <input type="radio" id="tipo2" name="tipo" value="Indexado">
+        <label for="tipo2">Indexado</label>
+    </div>
+    <div class="mb-3">
+        <div class="accordion" id="acordeonTerminos">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTerminos">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTerminos" aria-expanded="false" aria-controls="collapseTerminos">
+                        Términos y condiciones
+                    </button>
+                </h2>
+                <div id="collapseTerminos" class="accordion-collapse collapse" aria-labelledby="headingTerminos" data-bs-parent="#acordeonTerminos">
+                    <div class="accordion-body">
+                        <b>Importante:</b> Todos los fondos creados serán <span style="color: #007bff; font-weight: bold;">públicos</span> y visibles para todos los usuarios registrados en la plataforma.<br><br>
+                        Esto fomenta la <b>cohesión</b>, la <b>colaboración</b> y la <b>transparencia</b> entre los inversores. Podrás inspirarte en las estrategias de otros usuarios, compartir ideas y contribuir a una comunidad de inversión abierta, donde el conocimiento y las oportunidades se multiplican.<br><br>
+                        Crear fondos públicos ayuda a que todos aprendamos juntos y mejoremos nuestras decisiones financieras. ¡Juntos es más fácil alcanzar el éxito inversor!
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" id="acepta" name="acepta">
+            <label class="form-check-label" for="acepta">
+                Acepto los términos y condiciones
+            </label>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="pais" class="form-label">País</label>
+        <select class="form-select" id="pais" name="pais" required>
+            <option value="">Selecciona un país</option>
+            <option value="España">España</option>
+            <option value="Estados Unidos">Estados Unidos</option>
+            <option value="Alemania">Alemania</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="accionesFondo" class="form-label">Selecciona las acciones que compondrán tu fondo</label>
+        <select multiple class="form-select" id="accionesFondo" name="accionesFondo[]" required style="height: 250px;"></select>
+        <div class="form-text">Mantén pulsada Ctrl o Cmd para seleccionar varias acciones</div>
+    </div>
+    <div class="mb-3">
+        <span>País seleccionado: <span id="paisSeleccionado"></span></span>
+    </div>
+    <div class="mb-3">
+        <div class="accordion" id="acordeonTerminos">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTerminos">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTerminos" aria-expanded="false" aria-controls="collapseTerminos">
+                        Términos y condiciones
+                    </button>
+                </h2>
+                <div id="collapseTerminos" class="accordion-collapse collapse" aria-labelledby="headingTerminos" data-bs-parent="#acordeonTerminos">
+                    <div class="accordion-body">
+                        <b>Importante:</b> Todos los fondos creados serán <span style="color: #007bff; font-weight: bold;">públicos</span> y visibles para todos los usuarios registrados en la plataforma.<br><br>
+                        Esto fomenta la <b>cohesión</b>, la <b>colaboración</b> y la <b>transparencia</b> entre los inversores. Podrás inspirarte en las estrategias de otros usuarios, compartir ideas y contribuir a una comunidad de inversión abierta, donde el conocimiento y las oportunidades se multiplican.<br><br>
+                        Crear fondos públicos ayuda a que todos aprendamos juntos y mejoremos nuestras decisiones financieras. ¡Juntos es más fácil alcanzar el éxito inversor!
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" id="acepta" name="acepta">
+            <label class="form-check-label" for="acepta">
+                Acepto los términos y condiciones
+            </label>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Registrar Fondo</button>
+</form>
+<div id="mensajeFondoIndexado"></div>
+<!-- Fin formulario -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/fondosIndexados.js"></script>
+    <div class="fondos-header">
+    <h1>Guía de Inversión: Fondos Indexados, ETFs y Acciones</h1>
+    <p>Descubre cómo invertir de manera eficiente y diversificada en fondos indexados, ETFs y acciones. Aprende sus diferencias, ventajas, riesgos y cómo empezar paso a paso.</p>
+</div>
+
+<div class="guide-section">
+    <h3>¿Qué es un Fondo Indexado?</h3>
+    <p>Un <b>fondo indexado</b> es un fondo de inversión que replica el comportamiento de un índice bursátil, como el IBEX 35, S&P 500 o MSCI World. Son productos de gestión pasiva con bajas comisiones y gran diversificación.</p>
+    <ul>
+        <li><b>Ejemplo:</b> Vanguard S&P 500, Amundi MSCI World, ING Direct Fondo Naranja S&P 500.</li>
+        <li><b>Ventajas:</b> Costes bajos, diversificación global, gestión sencilla.</li>
+        <li><b>Riesgos:</b> Volatilidad de mercado, riesgo divisa si inviertes fuera de tu moneda.</li>
+    </ul>
+</div>
+
+<div class="guide-section">
+    <h3>¿Qué es un ETF?</h3>
+    <p>Un <b>ETF</b> (Exchange Traded Fund) es un fondo cotizado en bolsa que también replica índices, pero se compra y vende como una acción. Permite estrategias más flexibles y acceso inmediato.</p>
+    <ul>
+        <li><b>Ejemplo:</b> iShares Core MSCI World, Lyxor Euro Stoxx 50 ETF.</li>
+        <li><b>Ventajas:</b> Liquidez, operativa intradía, bajas comisiones.</li>
+        <li><b>Riesgos:</b> Riesgo de mercado, posible tracking error, fiscalidad diferente en algunos países.</li>
+    </ul>
+</div>
+
+<div class="guide-section">
+    <h3>¿Qué es invertir en Acciones?</h3>
+    <p>Invertir en <b>acciones</b> significa comprar participaciones de empresas individuales. Requiere análisis y gestión activa, pero permite obtener dividendos y potencial de revalorización.</p>
+    <ul>
+        <li><b>Ejemplo:</b> Comprar acciones de Iberdrola, Apple, Santander, Tesla, etc.</li>
+        <li><b>Ventajas:</b> Potencial de rentabilidad alto, dividendos, control directo sobre la cartera.</li>
+        <li><b>Riesgos:</b> Mayor volatilidad, riesgo de quiebra de la empresa, requiere tiempo y conocimientos.</li>
+    </ul>
+</div>
+
+<div class="guide-section">
+    <h3>Tabla Comparativa</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered comparison-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Fondos Indexados</th>
+                    <th>ETF</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Comisiones</th>
+                    <td>Muy bajas</td>
+                    <td>Bajas</td>
+                    <td>Variables</td>
+                </tr>
+                <tr>
+                    <th>Diversificación</th>
+                    <td>Alta</td>
+                    <td>Alta</td>
+                    <td>Baja (depende de tu cartera)</td>
+                </tr>
+                <tr>
+                    <th>Liquidez</th>
+                    <td>Media (D+1 o D+2)</td>
+                    <td>Alta (cotiza en bolsa)</td>
+                    <td>Alta</td>
+                </tr>
+                <tr>
+                    <th>Fiscalidad</th>
+                    <td>Traspasables en España</td>
+                    <td>No traspasables</td>
+                    <td>No traspasables</td>
+                </tr>
+                <tr>
+                    <th>Gestión</th>
+                    <td>Pasiva</td>
+                    <td>Pasiva</td>
+                    <td>Activa</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="guide-section">
+    <h3>¿Por dónde empezar?</h3>
+    <ol>
+        <li>Define tu perfil de riesgo y horizonte temporal.</li>
+        <li>Elige un bróker o banco que ofrezca fondos indexados y/o ETFs con bajas comisiones.</li>
+        <li>Comienza con aportaciones periódicas y mantén la disciplina inversora.</li>
+        <li>Evita dejarte llevar por las emociones: invierte a largo plazo.</li>
+    </ol>
+</div>
+
+<div class="guide-section">
+    <h3>Advertencias y Consejos</h3>
+    <ul>
+        <li>La rentabilidad pasada no garantiza rentabilidades futuras.</li>
+        <li>Diversifica entre regiones y sectores.</li>
+        <li>Revisa las comisiones y la fiscalidad antes de invertir.</li>
+        <li>Consulta fuentes oficiales y contrasta información.</li>
+    </ul>
+</div>
+
+<div class="guide-section">
+    <h3>Recursos útiles</h3>
+    <ul class="resources-list">
+        <li><a href="https://www.rankia.com/blog/mejores-fondos-indexados" target="_blank">Mejores fondos indexados en Rankia</a></li>
+        <li><a href="https://www.finect.com/categorias/fondos-indexados" target="_blank">Comparador de fondos en Finect</a></li>
+        <li><a href="https://www.morningstar.es" target="_blank">Morningstar España</a></li>
+        <li><a href="https://es.investing.com/etfs/" target="_blank">Listado de ETFs en Investing.com</a></li>
+    </ul>
+</div>
+
+    <div class="info-box">
+        <b>¿Qué es un fondo indexado?</b><br>
+        Un fondo indexado es un fondo de inversión que replica un índice bursátil (como S&P 500, Euro Stoxx 50 o MSCI World). Permite invertir en cientos de empresas de forma sencilla y con bajas comisiones.
+    </div>
+    <div class="card-group mb-4">
+        <div class="card fondos-card">
+            <div class="icon"><i class="fas fa-globe"></i></div>
+            <h5>Diversificación Global</h5>
+            <p>Invierte en cientos o miles de empresas de todo el mundo con una sola operación.</p>
+        </div>
+        <div class="card fondos-card">
+            <div class="icon"><i class="fas fa-percent"></i></div>
+            <h5>Bajos Costes</h5>
+            <p>Comisiones muy reducidas frente a fondos de gestión activa. Más rentabilidad para ti.</p>
+        </div>
+        <div class="card fondos-card">
+            <div class="icon"><i class="fas fa-universal-access"></i></div>
+            <h5>Accesibilidad</h5>
+            <p>Fáciles de contratar y entender. Ideales tanto para principiantes como para inversores experimentados.</p>
+        </div>
+    </div>
+    <div class="fondos-table">
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Índice</th>
+                    <th>TER (%)</th>
+                    <th>Rentabilidad 5 años (%)</th>
+                    <th>Divisa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Vanguard S&P 500 UCITS ETF</td>
+                    <td>S&P 500</td>
+                    <td>0.07</td>
+                    <td>85.2</td>
+                    <td>USD</td>
+                </tr>
+                <tr>
+                    <td>Amundi MSCI World AE-C</td>
+                    <td>MSCI World</td>
+                    <td>0.18</td>
+                    <td>67.5</td>
+                    <td>EUR</td>
+                </tr>
+                <tr>
+                    <td>iShares Core MSCI EM IMI UCITS ETF</td>
+                    <td>MSCI Emerging Markets</td>
+                    <td>0.18</td>
+                    <td>16.4</td>
+                    <td>USD</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="info-box">
+        <b>¿Por qué elegir fondos indexados?</b>
+        <ul>
+            <li>Diversificación automática</li>
+            <li>Bajos costes de gestión (TER)</li>
+            <li>Transparencia y sencillez</li>
+            <li>Rentabilidad histórica atractiva</li>
+        </ul>
+    </div>
+    <div class="info-box">
+        <b>¿Cómo invertir?</b><br>
+        Puedes invertir en fondos indexados a través de bancos, brókers online o gestoras especializadas. Es recomendable informarse y comparar antes de invertir.
+    </div>
+    <div class="fondos-table">
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Índice</th>
+                    <th>TER (%)</th>
+                    <th>Rentabilidad 5 años (%)</th>
+                    <th>Divisa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Vanguard S&P 500 UCITS ETF</td>
+                    <td>S&P 500</td>
+                    <td>0.07</td>
+                    <td>85.2</td>
+                    <td>USD</td>
+                </tr>
+                <tr>
+                    <td>Amundi MSCI World AE-C</td>
+                    <td>MSCI World</td>
+                    <td>0.18</td>
+                    <td>67.5</td>
+                    <td>EUR</td>
+                </tr>
+                <tr>
+                    <td>iShares Core MSCI EM IMI UCITS ETF</td>
+                    <td>MSCI Emerging Markets</td>
+                    <td>0.18</td>
+                    <td>16.4</td>
+                    <td>USD</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="info-box">
+        <b>Ventajas de los fondos indexados:</b>
+        <ul>
+            <li>Bajos costes de gestión (TER)</li>
+            <li>Alta diversificación</li>
+            <li>Transparencia y sencillez</li>
+            <li>Rentabilidad histórica atractiva</li>
+        </ul>
+    </div>
+    <div class="info-box">
+        <b>¿Cómo invertir?</b><br>
+        Puedes invertir en fondos indexados a través de bancos, brókers online o gestoras especializadas. Es recomendable informarse y comparar antes de invertir.
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoA6DQDkU5yM1Q1rZV+5Q5Q5r5F5Q5Q5Q5Q5Q5Q5Q5Q5Q5Q" crossorigin="anonymous"></script>
+</body>
+</html>
