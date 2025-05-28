@@ -86,7 +86,15 @@
       <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
       <span>InmoGest</span>
     </a>
-    <div class="collapse navbar-collapse justify-content-end">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/admin/usuarios}">Administrar usuarios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/admin}">Media de edad</a>
+        </li>
+      </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" th:href="@{/logout}"><i class="bi bi-box-arrow-right"></i> Logout</a>

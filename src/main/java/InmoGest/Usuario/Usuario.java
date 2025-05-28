@@ -47,7 +47,7 @@ public class Usuario implements Serializable {
     private String username;
     private String password;
     private String email;
-    private int telefono;
+    private String telefono;
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate fecha;
 
@@ -85,6 +85,14 @@ public class Usuario implements Serializable {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
 }

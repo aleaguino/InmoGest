@@ -23,8 +23,14 @@ public class RegistroController {
     }
 
     @PostMapping("/registro")
-    public String procesarFormularioRegistro(@ModelAttribute Usuario usuario) {
-        usuarioService.guardarUsuario(usuario);
-        return "redirect:/login";
+    public String procesarFormularioRegistro(@ModelAttribute Usuario usuario, Model model) {
+        try {
+            usuarioService.guardarUsuario(usuario);
+            return "redirect:/login?success=true";
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            model.addAttribute("usuario", usuario);
+            model.addAttribute("errorRegistro", "El nombre de usuario ya está en uso.");
+            return "registro";
+        }
     }
 }

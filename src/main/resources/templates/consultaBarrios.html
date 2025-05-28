@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Barrios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(180deg, #e0f7fa, #005f73);
+            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            padding-top: 60px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .navbar {
+            background: #028090;
+            padding: 0.75rem 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            font-family: 'Lobster', cursive;
+            font-size: 2rem;
+            color: #fff !important;
+        }
+        .main-content, .consulta-container {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 30px 35px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            max-width: 650px;
+            flex: 1;
+        }
+        .result-box {
+            background: #e9f7ef;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+        }
+        .btn-info {
+            background-color: #028090;
+            border-color: #028090;
+            color: #fff;
+            border-radius: 15px;
+            font-weight: 700;
+        }
+        .btn-info:hover {
+            background-color: #005f73;
+            border-color: #005f73;
+        }
+        .form-label {
+            font-weight: 700;
+            color: #028090;
+        }
+        .form-control {
+            border-radius: 10px;
+            border: 1px solid #b2dfdb;
+        }
+        h2, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #028090;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        ul > li {
+            margin-bottom: 0.7em;
+        }
+        .resumen-servicios ul {
+            columns: 2;
+        }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/piso/piso}">InmoGest</a>
+        </div>
+    </nav>
+    <div class="consulta-container mt-5">
+        <h2 class="mb-4 text-center">Consulta de Barrios</h2>
+        <form id="formBarrio" onsubmit="buscarBarrio(); return false;">
+            <div class="mb-3">
+                <label for="barrio" class="form-label">Barrio o dirección</label>
+                <input type="text" class="form-control" id="barrio" placeholder="Ej: Triana, Sevilla" required>
+            </div>
+            <button type="submit" class="btn btn-info w-100">Buscar en la API</button>
+        </form>
+        <div id="resultadoBarrio" class="result-box mt-3" style="display:none"></div>
+    </div>
+    <script src="/consultaBarrios.js"></script>
+    <script>
+        function buscarBarrio() {
+            const input = document.getElementById('barrio').value;
+            if (!input) return;
+            document.getElementById('resultadoBarrio').style.display = 'block';
+            document.getElementById('resultadoBarrio').innerHTML = 'Buscando datos...';
+            // Separar ciudad y dirección si es posible
+            let ciudad = input;
+            let direccion = '';
+            if (input.includes(',')) {
+                const partes = input.split(',');
+                direccion = partes[0].trim();
+                ciudad = partes[1].trim();
+            }
+            consultaBarrio(ciudad, direccion);
+        }
+    </script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

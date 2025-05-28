@@ -141,6 +141,22 @@
     </nav>
     
     <div class="container main-content">
+        <!-- Panel de perfil de usuario -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body d-flex flex-column flex-md-row align-items-center">
+                        <img th:src="@{/149071.png}" alt="Avatar" class="rounded-circle me-4" style="width:70px;height:70px;background:#e0f7fa;object-fit:cover;">
+                        <div>
+                            <h5 class="mb-1">Perfil de usuario</h5>
+                            <p class="mb-1"><strong>Nombre de usuario:</strong> <span th:text="${usuario.username}"></span></p>
+                            <p class="mb-1"><strong>Email:</strong> <span th:text="${usuario.email}"></span></p>
+                            <p class="mb-0"><strong>Teléfono:</strong> <span th:text="${usuario.telefono}"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row header-title">
             <div class="col text-center">
                 <img th:src="@{/assets/inmogest.png}" alt="InmoGest">

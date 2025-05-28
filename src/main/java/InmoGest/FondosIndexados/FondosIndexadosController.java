@@ -54,18 +54,23 @@ public class FondosIndexadosController {
     @ResponseBody
     public ResponseEntity<?> registrarFondo(@RequestBody FondoDTO fondoDTO) {
         try {
+            System.out.println("Acciones recibidas en DTO: " + fondoDTO.getAcciones());
             Fondo fondo = new Fondo();
             fondo.setNombre(fondoDTO.getNombre());
             fondo.setCantidad(fondoDTO.getCantidad());
             fondo.setTipo(fondoDTO.getTipo());
             fondo.setAcepta(fondoDTO.isAcepta());
             fondo.setPais(fondoDTO.getPais());
-            if (fondoDTO.getAcciones() != null) {
+            if (fondoDTO.getAcciones() != null && !fondoDTO.getAcciones().isEmpty()) {
                 fondo.setAcciones(fondoDTO.getAcciones());
+            } else {
+                fondo.setAcciones(new java.util.ArrayList<>());
             }
+            System.out.println("Acciones que se guardan en el fondo: " + fondo.getAcciones());
             fondoRepository.save(fondo);
             return ResponseEntity.ok().body("{\"mensaje\":\"Fondo registrado correctamente\"}");
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(500).body("{\"mensaje\":\"Error al guardar el fondo\"}");
         }
     }
