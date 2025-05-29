@@ -12,4 +12,8 @@ public class ContactaService {
     public void saveContacta(Contacta contacta) {
         contactaRepository.save(contacta);
     }
+
+    public java.util.List<Contacta> obtenerTodosLosContactas() {
+        return contactaRepository.findAll();
+    }
 }

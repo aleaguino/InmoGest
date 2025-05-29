@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
             background: linear-gradient(180deg, #e0f7fa, #005f73);
@@ -77,44 +78,41 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container-fluid">
-        <a class="navbar-brand" aria-current="page" th:href="@{/piso/piso}">
-            <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
-            <span>InmoGest</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/fondos-indexados}">Fondos Indexados</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/grafica}">Gráfica</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/mapa}">Mapa</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/calculadora}">Calculadora</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/cambiar-contrasena}">Cambiar Contraseña</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/contacta}">Contacta</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/logout}">Logout</a>
-                </li>
-            </ul>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" aria-current="page" th:href="@{/piso/piso}">
+                <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
+                <span>InmoGest</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/grafica}">Grafica</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/mapa}">Mapa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/calculadora}">Calculadora</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/editar}">Cambiar Contraseña</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/contacta}">Contacta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/logout}">Logout</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
@@ -122,14 +120,11 @@
                 <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
                 <span>InmoGest</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto">
-    <li class="nav-item" sec:authorize="hasRole('USUARIO')">
-        <a class="nav-link text-light" th:href="@{/fondos-indexados}">Fondos Indexados</a>
-    </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" aria-current="page" th:href="@{/piso/grafica}">Grafica</a>
                     </li>
@@ -204,7 +199,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 InmoGest. Todos los derechos reservados.</p>
+            <p>&copy; 2025 InmoGest. Todos los derechos reservados.</p>
         </div>
     </footer>
 

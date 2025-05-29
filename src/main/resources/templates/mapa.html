@@ -14,8 +14,6 @@
             font-family: 'Montserrat', sans-serif;
             padding-top: 60px;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
         .navbar {
             background: #028090;
@@ -86,9 +84,6 @@
             margin-top: auto;
         }
         .header-title {
-            display: flex;
-            align-items: center;
-            justify-content: center;
             margin-bottom: 20px;
             font-family: 'Montserrat', sans-serif; /* Aplica la fuente Montserrat al título */
         }
@@ -105,37 +100,34 @@
 <body>
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" aria-current="page" th:href="@{/piso/lista}">
+            <a class="navbar-brand" aria-current="page" th:href="@{/piso/piso}">
                 <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
                 <span>InmoGest</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto">
-    <li class="nav-item" sec:authorize="hasRole('USUARIO')">
-        <a class="nav-link text-light" th:href="@{/fondos-indexados}">Fondos Indexados</a>
-    </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/grafica}">Grafica</a>
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/grafica}" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">Grafica</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/mapa}">Mapa</a>
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/mapa}" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">Mapa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/calculadora}">Calculadora</a>
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/calculadora}" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">Calculadora</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link text-light" aria-current="page" th:href="@{/editar}">Cambiar Contraseña</a>
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/editar}" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">Cambiar Contraseña</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" aria-current="page" th:href="@{/contacta}">Contacta</a>
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/contacta}" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">Contacta</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" aria-current="page" th:href="@{/logout}">Logout</a>
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/logout}" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">Logout</a>
                     </li>
                 </ul>
             </div>

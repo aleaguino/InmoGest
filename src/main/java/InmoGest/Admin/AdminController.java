@@ -14,6 +14,8 @@ import java.util.List;
 @Controller
 public class AdminController {
     @Autowired
+    private InmoGest.Contacta.ContactaService contactaService;
+    @Autowired
     private UsuarioService usuarioService;
 
     @GetMapping("/admin")
@@ -33,6 +35,13 @@ public class AdminController {
         model.addAttribute("edades", edades);
         model.addAttribute("mediaEdad", media);
         return "admin/dashboard";
+    }
+
+    @GetMapping("/admin/mensajes")
+    public String verMensajesContacta(Model model) {
+        java.util.List<InmoGest.Contacta.Contacta> mensajes = contactaService.obtenerTodosLosContactas();
+        model.addAttribute("mensajes", mensajes);
+        return "admin/admin_mensajes";
     }
 }
 

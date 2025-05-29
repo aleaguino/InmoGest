@@ -94,6 +94,9 @@
         <li class="nav-item">
           <a class="nav-link" th:href="@{/admin}">Media de edad</a>
         </li>
+        <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+            <a class="nav-link text-light" aria-current="page" th:href="@{/admin/mensajes}"><i class="bi bi-envelope"></i> Bandeja Contacta</a>
+        </li>
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
