@@ -100,7 +100,7 @@ public class UsuarioController {
             }
             usuario.setPassword(passwordEncoder.encode(newPassword));
             usuarioService.save(usuario);
-            return "redirect:/login?success=true"; // Redirigir al login con parámetro de éxito
+            return "redirect:/login?success=password"; // Redirigir al login con parámetro de éxito
         }
 
         model.addAttribute("error", "La nueva contraseña no puede estar vacía");

@@ -1,5 +1,3 @@
-// validacionRegistro.js
-
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form[th\\:action="@{/registro}"]') || document.querySelector('form[action="/registro"]');
     if (!form) return;

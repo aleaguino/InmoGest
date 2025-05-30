@@ -122,9 +122,7 @@
                 <div class="card shadow">
                     <div class="card-body">
     <!-- Mensajes de error y éxito -->
-    <div th:if="${param.success}" class="alert alert-success text-center mb-4">
-        Usuario registrado correctamente. Tu cuenta está pendiente de validación por un administrador.
-    </div>
+    <div th:if="${success}" class="alert alert-success text-center mb-4" th:text="${success}"></div>
 
     <div th:if="${param.pendiente != null}" class="alert alert-danger text-center fw-bold mb-4" role="alert">
         Tu cuenta aún no está activa. Un administrador debe habilitarla para que puedas acceder.
@@ -145,7 +143,10 @@
                                 </div>
                             </div>
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-primary btn-lg">Iniciar Sesión</button>
+                                <button type="submit" class="btn btn-primary btn-lg" id="loginBtn">
+    Iniciar Sesión
+    <span id="loginSpinner" class="spinner-border spinner-border-sm ms-2 d-none" role="status" aria-hidden="true"></span>
+</button>
                             </div>
                             <div th:if="${param.error != null}" class="alert alert-danger mt-3 text-center fw-bold" role="alert">
     Usuario o contraseña incorrectos.
@@ -159,6 +160,15 @@
                             <a th:href="@{/recuperar}">¿Olvidaste tu contraseña?</a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="alert alert-warning mt-4 text-center" style="font-size: 0.97em; max-width: 550px; margin: 0 auto;">
+            ¿No puedes iniciar sesión aunque tus credenciales son correctas? Es posible que tu cuenta aún no haya sido habilitada por un administrador.
+        </div>
+    </div>
                 </div>
             </div>
         </div>
@@ -190,12 +200,29 @@
         if (window.location.search.indexOf('admin=true') !== -1) {
             alert('¡Ya eres admin! Inicia sesión para acceder a la administración.');
         }
-        if (window.location.search.indexOf('pendiente=true') !== -1) {
-            var pendienteDiv = document.getElementById('pendienteAlert');
-            if (pendienteDiv) {
-                pendienteDiv.style.display = 'block';
+        window.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.querySelector('form[action="/login"], form[action*="login"]');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const btn = document.getElementById('loginBtn');
+                    const spinner = document.getElementById('loginSpinner');
+                    if (btn && spinner) {
+                        btn.disabled = true;
+                        spinner.classList.remove('d-none');
+                    }
+                    setTimeout(() => {
+                        loginForm.submit();
+                    }, 1100);
+                });
             }
-        }
+            if (window.location.search.indexOf('pendiente=true') !== -1) {
+                var pendienteDiv = document.getElementById('pendienteAlert');
+                if (pendienteDiv) {
+                    pendienteDiv.style.display = 'block';
+                }
+            }
+        });
     </script>
 </body>
 </html>

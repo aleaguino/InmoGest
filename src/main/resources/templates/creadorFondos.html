@@ -106,35 +106,24 @@
                     <li class="nav-item">
                         <a class="nav-link text-light" aria-current="page" th:href="@{/piso/mapa}">Mapa</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/calculadora}">Calculadora</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/editar}">Cambiar Contraseña</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/contacta}">Contacta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/logout}">Logout</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
-
-<nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/piso/piso}">
-            <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
-            <span>InmoGest</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarInversiones" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Inversiones en Bolsa
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarInversiones">
-                        <li><a class="dropdown-item" th:href="@{/guia-inversion}">Guía de Inversión</a></li>
-                        <li><a class="dropdown-item" th:href="@{/creador-fondos}">Creador de Fondos</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 <div class="main-content">
     <h2>Registro de Fondo Indexado</h2>
     <form id="formFondos" class="mb-4">
@@ -160,6 +149,10 @@
                 <option value="España">España</option>
                 <option value="Estados Unidos">Estados Unidos</option>
                 <option value="Alemania">Alemania</option>
+                <option value="Japón">Japón</option>
+                <option value="China">China</option>
+                <option value="Francia">Francia</option>
+                <option value="Reino Unido">Reino Unido</option>
             </select>
         </div>
         <div class="mb-3">
@@ -198,8 +191,6 @@
     </form>
     <div id="mensajeFondoIndexado"></div>
 
-    <h3 class="mt-5">Acciones disponibles para componer tu fondo</h3>
-    <div id="tabla-acciones-disponibles" class="mb-4"></div>
 
     <h3 class="mt-5">Fondos públicos creados por la comunidad</h3>
     <div class="table-responsive mt-3">

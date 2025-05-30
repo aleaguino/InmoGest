@@ -22,16 +22,18 @@ public class LoginController {
             model.addAttribute("error", "Usuario o contraseña incorrectos.");
         }
 
-        if (success != null) {
-            model.addAttribute("success", "Contraseña cambiada correctamente. Por favor, inicia sesión.");
+        if ("register".equals(success)) {
+            model.addAttribute("success", "Usuario registrado correctamente. Tu cuenta aun esta pendiente de habilitar por un administrador.");
+        } else if ("password".equals(success)) {
+            model.addAttribute("success", "Contraseña cambiada correctamente. Por favor, inicia sesión con tu nueva contraseña.");
+        } else {
+            if (correcto != null) {
+                model.addAttribute("correcto", "Contraseña cambiada correctamente.");
+            }
         }
 
         if (cambio != null) {
             model.addAttribute("cambio", "Contraseña actual incorrecta. Por favor, inicie sesión de nuevo.");
-        }
-
-        if (correcto != null) {
-            model.addAttribute("correcto", "Contraseña cambiada correctamente.");
         }
 
         return "login";

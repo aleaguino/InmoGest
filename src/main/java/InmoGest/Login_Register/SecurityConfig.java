@@ -27,7 +27,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // SOLO PARA DESARROLLO: permite POST sin autenticación ni CSRF a /api/fondos-indexados y /api/fondos
         http.csrf().disable()
             .authorizeRequests()
             .antMatchers("/api/fondos-indexados", "/api/fondos").permitAll()
@@ -58,7 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .permitAll();
-        // FIN SOLO DESARROLLO
     }
 
     @Bean

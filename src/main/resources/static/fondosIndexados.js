@@ -87,6 +87,9 @@ const formFondos = document.getElementById('formFondos');
 if (formFondos) {
     formFondos.addEventListener('submit', function(e) {
         e.preventDefault();
+        // Limpiar mensajes previos
+        mostrarMensajeFondo('', '');
+
         const nombre = document.getElementById('nombre').value.trim();
         const cantidad = document.getElementById('cantidad').value;
         const tipo = document.querySelector('input[name="tipo"]:checked')?.value || '';
@@ -100,12 +103,14 @@ if (formFondos) {
         fetch('/api/fondos-indexados', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({nombre, cantidad, tipo, acepta, pais, acciones: accionesSel})
+            body: JSON.stringify({ nombre, cantidad, tipo, acepta, pais, acciones: accionesSel })
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res))
+        .then(res => res.json())
         .then(data => {
             mostrarMensajeFondo('¡Fondo guardado correctamente!', 'success');
             formFondos.reset();
+            // Añadir el nuevo fondo a la tabla de fondos públicos
+            agregarFondoATabla({ nombre, cantidad, tipo, pais, acciones: accionesSel });
         })
         .catch(() => mostrarMensajeFondo('Error al guardar el fondo.', 'danger'));
     });
@@ -114,9 +119,34 @@ if (formFondos) {
 function mostrarMensajeFondo(msg, tipo) {
     const div = document.getElementById('mensajeFondoIndexado');
     if (div) {
-        div.innerHTML = `<div class="alert alert-${tipo}">${msg}</div>`;
+        if (!msg) {
+            div.innerHTML = '';
+        } else {
+            div.innerHTML = `<div class="alert alert-${tipo}">${msg}</div>`;
+        }
     }
 }
+
+// Añade el nuevo fondo a la tabla de fondos públicos
+function agregarFondoATabla(fondo) {
+    const tabla = document.querySelector('table.table-bordered tbody');
+    if (!tabla) return;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td>${fondo.nombre}</td>
+        <td>${fondo.cantidad}</td>
+        <td>${fondo.tipo}</td>
+        <td>${fondo.pais}</td>
+        <td>
+            <span>${Array.isArray(fondo.acciones) ? fondo.acciones.join(', ') : fondo.acciones}</span>
+            <ul class="mb-0" style="list-style: none; padding-left: 0;">
+                ${(Array.isArray(fondo.acciones) ? fondo.acciones : [fondo.acciones]).map(acc => `<li>${acc}</li>`).join('')}
+            </ul>
+        </td>
+    `;
+    tabla.appendChild(tr);
+}
+
 
     // Tabla de acciones rentables
     fetch('/acciones2024.json')

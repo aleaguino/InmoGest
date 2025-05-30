@@ -1,6 +1,3 @@
-// Script para descargar los detalles del piso en PDF usando jsPDF y html2canvas
-// Incluye estilos para que el PDF sea fiel a la vista web
-
 document.addEventListener('DOMContentLoaded', function() {
     const btn = document.getElementById('descargarPDF');
     if (!btn) return;

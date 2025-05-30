@@ -26,7 +26,7 @@ public class RegistroController {
     public String procesarFormularioRegistro(@ModelAttribute Usuario usuario, Model model) {
         try {
             usuarioService.guardarUsuario(usuario);
-            return "redirect:/login?success=true";
+            return "redirect:/login?success=register";
         } catch (org.springframework.dao.DataIntegrityViolationException e) {
             model.addAttribute("usuario", usuario);
             model.addAttribute("errorRegistro", "El nombre de usuario ya está en uso.");

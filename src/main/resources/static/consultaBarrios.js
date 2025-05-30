@@ -1,8 +1,5 @@
-// Este script hace una petición a la API de Geoapify Places para consultar datos de barrio
-// Necesitas tu propia API Key gratuita de https://www.geoapify.com/places-api/
-
 function consultaBarrio(ciudad, direccion) {
-    const apiKey = "61cb7e05097e4bb890214efee4b7e8c9"; // <-- API Key proporcionada por el usuario
+    const apiKey = "61cb7e05097e4bb890214efee4b7e8c9";
     let intento = 1;
     let queryFull = direccion ? `${direccion}, ${ciudad}, España` : `${ciudad}, España`;
     let querySimple = `${ciudad}, España`;
@@ -14,7 +11,6 @@ function consultaBarrio(ciudad, direccion) {
             if (data.features && data.features.length > 0) {
                 mostrarResultado(data, intento);
             } else if (direccion) {
-                // Si falla con dirección, intenta solo ciudad
                 intento = 2;
                 let url2 = `https://api.geoapify.com/v1/geocode/search?text=${encodeURIComponent(querySimple)}&lang=es&apiKey=${apiKey}`;
                 fetch(url2)
@@ -65,7 +61,6 @@ function mostrarResultado(data, intento) {
             <li><b>Tipo de zona:</b> ${tipoZona}</li>
             <li><b>Popularidad:</b> ${popularidad}</li>
             <li><b>Confianza API:</b> ${confianza}</li>
-            <li><b>Área aproximada:</b> ${area}</li>
             <li><b>Zona horaria:</b> ${zona} (${zonaAbbr})</li>
             <li><b>Ver en <a href="https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=15/${lat}/${lon}" target="_blank">OpenStreetMap</a></b></li>
         </ul>
