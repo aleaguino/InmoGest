@@ -14,6 +14,7 @@ public class Contacta {
     private Long id;
     private String nombre;
     private String email;
+    @javax.persistence.Column(length = 255)
     private String mensaje;
 
     // Getters and setters

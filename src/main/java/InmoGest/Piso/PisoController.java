@@ -28,6 +28,10 @@ public class PisoController {
     @Autowired
     private UsuarioService usuarioService;
 
+    /**
+     * Muestra la lista de pisos asociados al usuario autenticado.
+     * Calcula ingresos, gastos y diferencia, y los añade al modelo para la vista.
+     */
     @GetMapping("/piso")
     public String listarPisosPorUsuario(Model model, Principal principal) {
         String username = principal.getName();
@@ -47,6 +51,10 @@ public class PisoController {
         return "listaPisos";
     }
   
+    /**
+     * Muestra el formulario para añadir un nuevo piso.
+     * Añade el usuario autenticado y un objeto Piso vacío al modelo.
+     */
     @GetMapping("/formulario")
     public String mostrarFormularioPiso(Model model, Authentication authentication) {
         String nombreUsuario = authentication.getName();
@@ -57,13 +65,21 @@ public class PisoController {
     }
 
    
+    /**
+     * Guarda un piso nuevo asociado al usuario indicado.
+     * Redirige a la lista de pisos tras guardar.
+     */
     @PostMapping("/guardar")
     public String guardarPiso(@ModelAttribute("piso") Piso piso, @RequestParam("idUsuario") Long idUsuario) {
          pisoService.guardarPiso(piso, idUsuario);
         return "redirect:/piso/piso";  // Redirige a dlista de pisos
     }
     
-       @GetMapping("/modificar/{id}")
+       /**
+     * Muestra el formulario de edición para un piso existente.
+     * Si el piso no existe, redirige a la lista de pisos.
+     */
+    @GetMapping("/modificar/{id}")
     public String modificarPisoForm(@PathVariable Long id, Model model) {
     Piso piso = pisoService.obtenerPisoPorId(id);
     if (piso != null) {
@@ -75,6 +91,10 @@ public class PisoController {
 }
 
 
+    /**
+     * Procesa la edición de un piso existente y guarda los cambios.
+     * Redirige a los detalles del piso tras guardar.
+     */
     @PostMapping("/modificar/{id}")
     public String modificarPisoSubmit(@PathVariable Long id, @ModelAttribute("piso") Piso piso) {
     Piso pisoExistente = pisoService.obtenerPisoPorId(id);
@@ -163,10 +183,10 @@ public class PisoController {
         return "mapa";
     }
 
-//    @GetMapping("/contacta")
-//    public String mostrarContacta(Model model) {
-//        return "contacta";
-//    }
+    @GetMapping("/contacta")
+    public String mostrarContacta(Model model) {
+        return "contacta";
+    }
     
     @GetMapping("/grafica")
     public String mostrarGrafica(Model model) {

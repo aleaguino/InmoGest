@@ -20,10 +20,23 @@
             padding: 0.75rem 1rem;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        .navbar-brand {
+        .navbar-brand img {
+            height: 40px;
+        }
+        .navbar-brand span {
+            font-size: 1.5rem;
+            margin-left: 10px;
+            color: #fff;
             font-family: 'Lobster', cursive;
-            font-size: 2rem;
+        }
+        .navbar-nav .nav-link {
             color: #fff !important;
+            font-weight: 500;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #333 !important;
         }
         .main-content, .consulta-container {
             background: #ffffff;
@@ -79,11 +92,42 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" th:href="@{/piso/piso}">InmoGest</a>
+            <a class="navbar-brand" aria-current="page" th:href="@{/piso/piso}">
+                <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
+                <span>InmoGest</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/grafica}">Grafica</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/mapa}">Mapa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/piso/calculadora}">Calculadora</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/editar}">Cambiar Contraseña</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/contacta}">Contacta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" aria-current="page" th:href="@{/logout}">Logout</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
+
     <div class="consulta-container mt-5">
         <h2 class="mb-4 text-center">Consulta de Barrios</h2>
         <form id="formBarrio" onsubmit="buscarBarrio(); return false;">

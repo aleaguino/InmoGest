@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/api/fondos-indexados", "/api/fondos").permitAll()
             .antMatchers("/admin/**").hasAuthority("ADMIN")
-            .antMatchers("/", "/recuperar", "/cambiarContraseña","/registro", "/assets/**", "/static/**", "/css/**", "/js/**", "/images/**").permitAll()
+            .antMatchers("/", "/login", "/recuperar", "/cambiarContraseña","/registro", "/assets/**", "/static/**", "/css/**", "/js/**", "/images/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .formLogin()

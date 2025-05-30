@@ -22,6 +22,7 @@
             background: #028090;
             padding: 0.75rem 1rem;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
         }
         .navbar-brand img {
             height: 40px;
@@ -40,9 +41,6 @@
         }
         .navbar-nav .nav-link:hover {
             color: #333 !important;
-        }
-        .navbar-nav .nav-item:last-child {
-            margin-left: auto;
         }
         .main-content {
             background: #ffffff;
@@ -119,15 +117,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item dropdown" sec:authorize="hasRole('USUARIO')">
-                        <a class="nav-link dropdown-toggle text-light" href="#" id="navbarInversiones" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Inversiones en Bolsa
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarInversiones">
-                            <li><a class="dropdown-item" th:href="@{/guia-inversion}">Guía de Inversión</a></li>
-                            <li><a class="dropdown-item" th:href="@{/creador-fondos}">Creador de Fondos</a></li>
-                        </ul>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" aria-current="page" th:href="@{/piso/grafica}">Grafica</a>
                     </li>
@@ -275,11 +264,10 @@
     
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 InmoGest. Todos los derechos reservados.</p>
+            <p>&copy; 2025 InmoGest. Todos los derechos reservados.</p>
         </div>
     </footer>
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

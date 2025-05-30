@@ -22,6 +22,7 @@
             background: #028090;
             padding: 0.75rem 1rem;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
         }
         .navbar-brand img {
             height: 40px;
@@ -40,9 +41,6 @@
         }
         .navbar-nav .nav-link:hover {
             color: #333 !important;
-        }
-        .navbar-nav .nav-item:last-child {
-            margin-left: auto;
         }
         .main-content {
             background: #ffffff;
@@ -109,41 +107,12 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container-fluid">
-        <a class="navbar-brand" aria-current="page" th:href="@{/piso/piso}">
-            <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
-            <span>InmoGest</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item dropdown" sec:authorize="hasRole('USUARIO')">
-                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarInversiones" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Inversiones en Bolsa
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarInversiones">
-                        <li><a class="dropdown-item" th:href="@{/guia-inversion}">Guía de Inversión</a></li>
-                        <li><a class="dropdown-item" th:href="@{/creador-fondos}">Creador de Fondos</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" aria-current="page" th:href="@{/piso/grafica}">Grafica</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" aria-current="page" th:href="@{/piso/mapa}">Mapa</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
         <div class="container-fluid">
             <a class="navbar-brand" aria-current="page" th:href="@{/piso/piso}">
                 <img th:src="@{/assets/inmogest.png}" alt="InmoGest">
                 <span>InmoGest</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -287,7 +256,7 @@
     
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 InmoGest. Todos los derechos reservados.</p>
+            <p>&copy; 2025 InmoGest. Todos los derechos reservados.</p>
         </div>
     </footer>
     
